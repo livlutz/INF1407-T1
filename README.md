@@ -16,3 +16,4 @@ django-admin --version -> verifica a versão do django e se o django baixou
 django-admin startproject receitas_website -> cria o site (manage.py)
 python manage.py runserver
 python manage.py startapp receitas -> cria as aplicaçõeas do site
+python manage.py migrate -> migra o bd

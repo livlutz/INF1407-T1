@@ -20,5 +20,6 @@ from django.urls import path
 from receitas import views
 
 urlpatterns = [
-    path('',views.home),
+    path('',views.home, name = 'homepage'),
+    #path('SegundaPagina', views.segundaPagina, name='segunda'),
 ]
