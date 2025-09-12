@@ -20,6 +20,8 @@ from django.urls import path
 from receitas import views
 
 urlpatterns = [
+    #seria bom renomear o admin ou excluir, porem sem esse path nao conseguimos acessar o django admin
+    path("admin/", admin.site.urls),
     path('',views.home, name = 'homepage'),
     #path('SegundaPagina', views.segundaPagina, name='segunda'),
 ]

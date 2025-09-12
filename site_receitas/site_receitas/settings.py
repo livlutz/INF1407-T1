@@ -27,6 +27,7 @@ SECRET_KEY = "django-insecure-_^wd=r@k#%6(y4bn8$&o!e)2e2jf@en+cwozqa*n_ni1&2=flx
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://localhost:8000', 'https://localhost:8000']
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    #aplicacoes do projeto incluidas
     "receitas",
 ]
 
