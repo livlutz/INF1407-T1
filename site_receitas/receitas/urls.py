@@ -1,12 +1,11 @@
 
 from django.contrib import admin
 from django.urls import path
-from receitas import views 
+from receitas import views
 
-#app_name = 'receitas'
+app_name = 'receitas'
 
 urlpatterns = [
-    path('', views.home, name = 'homepage'),
-    path('<int:id>/', views.home, name= 'homepage_id'), # Não sei se funciona assim
-
+    path('', views.PubReceitasListView.as_view(), name = 'homepage'),
+    path('receita/<int:id>/', views.VerReceita.as_view(), name = 'ver-receita')
 ]

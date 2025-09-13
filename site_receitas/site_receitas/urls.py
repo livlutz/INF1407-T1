@@ -25,7 +25,7 @@ urlpatterns = [
     #seria bom renomear o admin ou excluir, porem sem esse path nao conseguimos acessar o django admin
     path("admin/", admin.site.urls, name = 'admin'),
     # The 'receitas' app URLs are included here, under the 'receitas/' path.
-    path('', include('receitas.urls')),
+    path('', include('receitas.urls', namespace='receitas')),
     # The 'usuarios' app URLs are included here, under the 'usuarios/' path.
-    path('', include('usuarios.urls')),
+    path('', include('usuarios.urls', namespace='usuarios')),
 ]

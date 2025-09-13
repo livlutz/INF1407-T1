@@ -61,14 +61,6 @@ Siga os passos abaixo para configurar e executar o projeto:
 
 Após executar este comando, você poderá acessar o site em `http://127.0.0.1:8000/` no seu navegador, ou ir na aba Ports do terminal e clicar no link da porta 8000, ou clicar no pop up que aparecerá no canto direito inferior da tela no botão "open in browser"
 
-* ❗💀 Superusuário do Django
-
-    Usuário : livialuiza
-
-    email : llutz@aluno.puc-rio.br
-
-    senha : 12345
-
 * **Após adicionar classes no models.py**:
     ```bash
     python manage.py makemigrations

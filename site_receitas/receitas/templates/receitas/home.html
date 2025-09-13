@@ -1,32 +1,16 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" inte></head>
-    <link rel="stylesheet" href="{% static 'css/receitas/style.css' %}">
-<body>
-    <div class="container text-center">
-        <h1>Home Page</h1>
-    </div>
-
-    <a href= "{% url 'homepage' %}" class="btn btn-info"> home page</a>
-
-    
-</body>
-</html>
-
-{% load static %}
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
+    <title>Receitinhas da vovó</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" inte></head>
     <link rel="stylesheet" href="{% static 'css/receitas/style.css' %}">
-   
+
 </head>
 <body class="bg-gray-50 text-gray-800">
+    <img src="{% static 'img/receitas/logo.png' %}" alt="Logo" class="logo-image">
 
     <!-- Header -->
     <header class="bg-white shadow-sm p-4 md:px-8">
@@ -38,9 +22,13 @@
                 <a href="#" class="text-gray-600 hover:text-orange-500 transition-colors duration-200">Sobre</a>
             </nav>
             <div class="hidden md:block">
-                <a href="#" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">
-                    Login / Cadastre-se
+                <a href="{% url 'usuarios:login' %}" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">
+                    Login
                 </a>
+                <a href="{% url 'usuarios:cadastro' %}" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">
+                    Cadastro
+                </a>
+
             </div>
             <!-- Mobile Menu Button -->
             <button class="md:hidden text-gray-600 focus:outline-none">
@@ -72,33 +60,18 @@
         <section class="my-12">
             <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Receitas em Destaque</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Recipe Card 1 -->
-                <div class="bg-white rounded-3xl shadow-lg overflow-hidden recipe-card">
-                    <img src="[https://placehold.co/600x400/FFDDC1/333333?text=Bolo+de+Cenoura](https://placehold.co/600x400/FFDDC1/333333?text=Bolo+de+Cenoura)" alt="Bolo de Cenoura" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Bolo de Cenoura com Cobertura de Chocolate</h3>
-                        <p class="text-gray-600 mb-4 line-clamp-3">Um clássico da culinária brasileira, este bolo fofinho e úmido é perfeito para qualquer ocasião. A cobertura de chocolate irresistível o torna ainda mais especial.</p>
-                        <a href="#" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-full transition-colors duration-200">Ver Receita</a>
+                {% for receita in pub_receitas %}
+                    <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200">
+                        <img src="{{ receita.foto_da_receita }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-2">{{ receita.titulo }}</h3>
+                            <p class="text-gray-600 mb-4">{{ receita.modo_de_preparo|truncatewords:20 }}</p>
+                            <a href="{% url 'receitas:ver-receita'  id=receita.id %}" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">Ver Receita</a>
+                        </div>
                     </div>
-                </div>
-                <!-- Recipe Card 2 -->
-                <div class="bg-white rounded-3xl shadow-lg overflow-hidden recipe-card">
-                    <img src="[https://placehold.co/600x400/C1E1FF/333333?text=Lasanha+Bolonhesa](https://placehold.co/600x400/C1E1FF/333333?text=Lasanha+Bolonhesa)" alt="Lasanha Bolonhesa" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Lasanha Bolonhesa Tradicional</h3>
-                        <p class="text-gray-600 mb-4 line-clamp-3">A autêntica lasanha bolonhesa, com camadas de massa fresca, um rico molho de carne e muito queijo. Uma refeição reconfortante e deliciosa para toda a família.</p>
-                        <a href="#" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-full transition-colors duration-200">Ver Receita</a>
-                    </div>
-                </div>
-                <!-- Recipe Card 3 -->
-                <div class="bg-white rounded-3xl shadow-lg overflow-hidden recipe-card">
-                    <img src="[https://placehold.co/600x400/D1FFC1/333333?text=Brigadeiro](https://placehold.co/600x400/D1FFC1/333333?text=Brigadeiro)" alt="Brigadeiro Gourmet" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">Brigadeiro Gourmet</h3>
-                        <p class="text-gray-600 mb-4 line-clamp-3">Eleve o doce mais amado do Brasil a um novo nível com esta receita de brigadeiro gourmet. Textura cremosa e sabor intenso que derretem na boca.</p>
-                        <a href="#" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-full transition-colors duration-200">Ver Receita</a>
-                    </div>
-                </div>
+                {% empty %}
+                    <p class="text-center text-gray-600">Nenhuma receita disponível no momento.</p>
+                {% endfor %}
             </div>
         </section>
 
@@ -114,7 +87,6 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-8 px-4">
         <div class="container mx-auto text-center">
-            <p>&copy; 2024 Receitas Incríveis. Todos os direitos reservados.</p>
             <div class="mt-4 space-x-4">
                 <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Política de Privacidade</a>
                 <span class="text-gray-600">•</span>

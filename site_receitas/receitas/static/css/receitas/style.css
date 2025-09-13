@@ -11,3 +11,29 @@ body {
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
+
+/* Estilos para a imagem do logo */
+.logo-image {
+    /* Define a altura da imagem */
+    height: 60px;
+    /* Garante que a imagem não seja esticada */
+    width: auto;
+    /* Adiciona bordas arredondadas */
+    border-radius: 8px;
+    /* Efeito de transição suave */
+    transition: transform 0.3s ease;
+}
+
+/* Efeito de escala quando o mouse passa sobre o logo */
+.logo-image:hover {
+    /* Aumenta a imagem em 5% */
+    transform: scale(1.05);
+}
+
+/* Estilos para telas menores (responsividade) */
+@media (max-width: 768px) {
+    .logo-image {
+        /* Reduz o tamanho do logo em telas menores */
+        height: 50px;
+    }
+}
