@@ -1,8 +1,7 @@
 from django.contrib import admin
-from receitas.models import Usuario, Receita
+from receitas.models import Receita
 
 # Register your models here.
 
-#registrando os modelos do usuario e receita
-admin.site.register(Usuario)
+#registrando o modelo de receita
 admin.site.register(Receita)
