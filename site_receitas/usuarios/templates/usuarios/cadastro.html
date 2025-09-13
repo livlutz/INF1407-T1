@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8hE68aNjrXkE5E5h5l7O3O6j6N6p6c6" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/usuarios/style.css' %}">
+    <title>Cadastro</title>
+</head>
+<body>
+    {% include 'usuarios/header.html'%}
+    {% include 'usuarios/links.html'%}
+    <h1>Cadastre-se</h1>
+    <form action="" method="POST">
+        <fieldset style="width: max-content;">
+            <legend>Formulário de Cadastro</legend>
+            {% csrf_token %}
+            <table class='formulario'>
+                {{ formulario.as_table }}
+            </table>
+            <button type="submit">Cadastrar</button>
+        </fieldset>
+    </form>
+    <div class="login-link">
+        Já tem uma conta? <a href="{% url 'login' %}">Login</a>
+    </div>
+</body>
+</html>

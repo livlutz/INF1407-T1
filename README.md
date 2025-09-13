@@ -49,16 +49,6 @@ Siga os passos abaixo para configurar e executar o projeto:
     django-admin --version
     ```
 
-* **Se for a primeira vez, crie a estrutura inicial do projeto**:
-    ```bash
-    django-admin startproject receitas_website
-    ```
-
-* **Se for a primeira vez, crie a aplicação `receitas`**:
-    ```bash
-    python manage.py startapp receitas
-    ```
-
 * **Aplique as migrações do banco de dados**:
     ```bash
     python manage.py migrate
@@ -75,7 +65,7 @@ Após executar este comando, você poderá acessar o site em `http://127.0.0.1:8
 
     Usuário : livialuiza
 
-    email : llutz@luno.puc-rio.br
+    email : llutz@aluno.puc-rio.br
 
     senha : 12345
 
