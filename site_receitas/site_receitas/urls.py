@@ -17,9 +17,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from receitas import views
+from django.urls import include
+
+#app_name = ('receitas','usuario')
 
 urlpatterns = [
-    path('',views.home, name = 'homepage'),
-    #path('SegundaPagina', views.segundaPagina, name='segunda'),
+    #seria bom renomear o admin ou excluir, porem sem esse path nao conseguimos acessar o django admin
+    path("admin/", admin.site.urls, name = 'admin'),
+    # The 'receitas' app URLs are included here, under the 'receitas/' path.
+    path('', include('receitas.urls')),
+    # The 'usuarios' app URLs are included here, under the 'usuarios/' path.
+    path('', include('usuarios.urls')),
 ]
