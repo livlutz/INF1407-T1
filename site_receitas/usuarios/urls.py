@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path
 from usuarios import views
 
-#app_name = 'usuario'
+app_name = 'usuario'
 
 urlpatterns = [
     path('login/', views.login, name='login'),
