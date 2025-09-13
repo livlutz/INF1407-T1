@@ -15,8 +15,11 @@ class Receita(models.Model):
     tempo_de_preparo = models.IntegerField(help_text='Tempo de preparo em minutos')
     porcoes = models.IntegerField(help_text='Numero de porcoes/ Quantas pessoas serve')
     categoria = models.CharField(max_length=100, help_text='Categoria da receita (ex: sobremesa, prato principal, etc.)')
-    foto_da_receita = models.ImageField(upload_to='site_receitas/receitas/static/img/receitas', null=True, blank=True)
-    visibilidade = models.CharField(max_length=10, choices=[('pub', 'Pub'), ('priv', 'Priv')], default='Priv', help_text='Defina se a receita é pública ou privada (Pub ou Priv)')
+
+    foto_da_receita = models.ImageField(upload_to='receitas/static/img/receitas', null=True, blank=True)
+    #Não ta fazendo upload
+
+    visibilidade = models.CharField(max_length=10, choices=[('pub', 'Pub'), ('priv', 'Priv')], default='Pub', help_text='Defina se a receita é pública ou privada (Pub ou Priv)')
     autor = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='receitas')
 
     class Meta:
