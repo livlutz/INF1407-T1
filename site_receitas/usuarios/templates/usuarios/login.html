@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8hE68aNjrXkE5E5h5l7O3O6j6N6p6c6" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/usuarios/style.css' %}">
     <title>Login</title>
-    {% include 'usuarios/header.html'%}
 </head>
 <body>
+    {% include 'usuarios/header.html'%}
+    {% include 'usuarios/links.html'%}
+
     <img src="{% static 'img/receitas/logo.png' %}" alt="Logo" class="logo-image">
     <div class="login-container">
         <h2>Bem-vindo!</h2>
@@ -24,11 +26,8 @@
             </div>
             <button type="submit" class="login-btn">Entrar</button>
         </form>
-        <div class="forgot-password">
-            <a href="#">Esqueceu sua senha?</a>
-        </div>
         <div class="signup-link">
-            Não tem uma conta? <a href="{% url 'cadastro' %}">Cadastre-se!</a>
+            Não tem uma conta? <a href="{% url 'usuarios:cadastro' %}">Cadastre-se!</a>
         </div>
     </div>
 </body>
