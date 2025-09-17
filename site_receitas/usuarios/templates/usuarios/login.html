@@ -6,25 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8hE68aNjrXkE5E5h5l7O3O6j6N6p6c6" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/usuarios/style.css' %}">
-    <title>Login</title>
+    <title>{{titulo_pagina}}</title>
 </head>
 <body>
     {% include 'usuarios/header.html'%}
     {% include 'usuarios/links.html'%}
-
+    <h1>{{titulo_janela}}</h1>
     <img src="{% static 'img/receitas/logo.png' %}" alt="Logo" class="logo-image">
     <div class="login-container">
         <h2>Bem-vindo!</h2>
-        <form action="#" method="post">
-            <div class="input-group">
-                <label for="username">Nome de Usuário ou Email</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="senha" required>
-            </div>
-            <button type="submit" class="login-btn">Entrar</button>
+        <form action="" method="post">
+            <fieldset style="width: max-content;">
+                <legend>Formulário de Login</legend>
+                {% csrf_token %}
+                <table class="formulario">
+                {{ formulario.as_table }}
+                </table>
+                {% if mensagem %}
+                    <p> {{ mensagem }} </p>
+                {% endif %}
+            </fieldset>
         </form>
         <div class="signup-link">
             Não tem uma conta? <a href="{% url 'usuarios:cadastro' %}">Cadastre-se!</a>

@@ -7,10 +7,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" inte></head>
     <link rel="stylesheet" href="{% static 'css/usuarios/style.css' %}">
     <img src="{% static 'img/receitas/logo.png' %}" alt="Logo" class="logo-image">
-    <title>Perfil</title>
-    {% include 'usuarios/header.html'%}
+    <title>{{titulo_pagina}}</title>
 </head>
 <body>
-
+    {% include 'usuarios/header.html'%}
+    {% include 'usuarios/links.html'%}
+    <h1>{{titulo_janela}}</h1>
+    <div class="profile-container">
+        <p><strong>Nome de Usuário:</strong> {{ usuario.username }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+        <div class="profile-actions">
+            <a href="{% url 'usuarios:atualizar_perfil' usuario.id %}" class="btn btn-primary">Atualizar Perfil</a>
+            <a href="{% url 'usuarios:deletar' usuario.id %}" class="btn btn-danger">Deletar Conta</a>
+            <a href="{% url 'usuarios:minhas_receitas' usuario.id %}" class="btn btn-secondary">Minhas Receitas</a>
+        </div>
 </body>
 </html>

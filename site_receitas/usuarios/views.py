@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from usuarios.forms import UsuarioModel2Form
+from usuarios.models import Usuario
+from receitas.models import Receita
 
 # Create your views here.
 
@@ -15,9 +17,17 @@ def cadastro(request):
 def perfil(request):
     return render(request, 'usuarios/perfil.html')
 
+def deletar(request):
+    return render(request, 'usuarios/deletar.html')
+
+#cria o usuario
 class UsuarioCreateView(View):
     def get(self, request, *args, **kwargs):
-        contexto = { 'formulario': UsuarioModel2Form, }
+        contexto = { 'formulario': UsuarioModel2Form,
+                     'titulo_janela' : 'Cadastro',
+                    'titulo_pagina': 'Cadastrar Usuário',
+                    'botao' : 'Cadastrar',}
+
         return render(request, "usuarios/cadastro.html", contexto)
 
     def post(self, request, *args, **kwargs):
@@ -25,22 +35,66 @@ class UsuarioCreateView(View):
         if formulario.is_valid():
             usuario = formulario.save()
             usuario.save()
+            return HttpResponseRedirect(reverse_lazy("receitas:homepage"))
         else:
             contexto = {'formulario': formulario, 'mensagem': 'Erro ao completar o cadastro!'}
-            return render(request, "usuario/cadastro.html", contexto)
+            return render(request, "usuarios/cadastro.html", contexto)
 
-        return HttpResponseRedirect(reverse_lazy("receitas: homepage")) # Não sei se funciona assim
-
-
-"""class ContatoListView(View):
-    #argumento e dicionário de argumentos (args e kwargs)
+#lista o perfil do usuario
+class UsuarioReadView(View):
     def get(self, request, *args, **kwargs):
-        #recupera todas as pessoas do banco de dados
-        pessoas = Pessoa.objects.all().order_by('nome')
-        #contexto para o template (dicionário)
-        #dicionário contexto
-        #chave 'pessoas'
-        #valor da chave é o objeto com todas as pessoas
-        contexto = {'pessoas': pessoas}
-        #lê,modifica e retorna o arquivo html
-        return render(request, 'contatos/listaContatos.html',contexto)"""
+        usuario = Usuario.objects.get(pk=id)
+        contexto = {'usuario': usuario,
+                    'formulario': UsuarioModel2Form(instance=usuario),
+                    'titulo_janela' : 'Perfil',
+                    'titulo_pagina': 'Perfil do Usuário',
+                    'botao' : 'Ver meu perfil',}
+        return render(request, "usuarios/perfil.html", contexto)
+
+#atualiza o usuario
+class UsuarioUpdateView(View):
+    def get(self, request, *args, **kwargs):
+        usuario = Usuario.objects.get(pk=id)
+        formulario = UsuarioModel2Form(instance=usuario)
+        contexto = {'formulario': formulario,
+                    'titulo_janela' : 'Atualizar conta',
+                    'titulo_pagina': 'Atualizar Perfil do Usuário',
+                    'botao' : 'Atualizar meu perfil',}
+        return render(request, "usuarios/perfil.html", contexto)
+
+    def post(self, request, *args, **kwargs):
+        usuario = get_object_or_404(Usuario, pk=id)
+        formulario = UsuarioModel2Form(request.POST, instance=usuario)
+        if formulario.is_valid():
+            usuario = formulario.save()
+            usuario.save()
+            return HttpResponseRedirect(reverse_lazy("usuarios: perfil"))
+        else:
+            contexto = {'formulario': formulario, 'mensagem': 'Erro ao atualizar o perfil!'}
+            return render(request, "usuarios/perfil.html", contexto)
+
+#deleta o usuario
+class UsuarioDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        usuario = Usuario.objects.get(pk=id)
+        contexto = {'usuario': usuario,
+                    'titulo_janela' : 'Deletar conta',
+                    'titulo_pagina': 'Deletar Perfil do Usuário',
+                    'botao' : 'Deletar minha conta',}
+        return render(request, "usuarios/deletar.html", contexto)
+
+    def post(self, request, *args, **kwargs):
+        usuario = Usuario.objects.get(pk=id)
+        usuario.delete()
+        return HttpResponseRedirect(reverse_lazy("usuarios: login"))
+
+#lista as receitas do usuario
+class ReceitaListView(View):
+    def get(self, request, *args, **kwargs):
+        usuario = Usuario.objects.get(pk=id)
+        receitas = Receita.objects.filter(autor=usuario)
+        contexto = {'usuario': usuario,
+                    'receitas': receitas,
+                    'titulo_janela' : 'Minhas Receitas',
+                    'titulo_pagina': 'Receitas do Usuário',}
+        return render(request, "usuarios/perfil.html", contexto)
