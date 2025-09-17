@@ -1,5 +1,5 @@
 body {
-  background-color: black; /*TODO: nao ta ficando preto*/
+  background-color: black !important; /*TODO: nao ta ficando preto*/
   color: #ffffff; /* White text color */
 }
 

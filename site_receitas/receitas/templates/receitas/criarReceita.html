@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{titulo.pagina}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" inte></head>
+    <link rel="stylesheet" href="{% static 'css/receitas/style.css' %}">
+    <img src="{% static 'img/receitas/logo.png' %}" alt="Logo" class="logo-image">
+</head>
+
+<body>
+    {% include 'usuarios/header.html'%}
+    {% include 'usuarios/links.html'%}
+    <img src="{% static 'img/receitas/logo.png' %}" alt="Logo" class="logo-image">
+    <h1>{{titulo_janela}}</h1>
+    <form action="" method="POST">
+        <fieldset style="width: max-content;">
+            <legend>Formulário de adicionar receita</legend>
+            {% csrf_token %}
+            <table class="formulario">
+            {{ formulario.as_table }}
+            </table>
+            {% if mensagem %}
+                <p> {{ mensagem }} </p>
+            {% endif %}
+            <button type="submit" class = "btn btn-primary">Adicionar</button>
+        </fieldset>
+    </form>
+</body>
