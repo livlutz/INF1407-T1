@@ -18,14 +18,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+from . import views
 
-#app_name = ('receitas','usuario')
 
 urlpatterns = [
     #seria bom renomear o admin ou excluir, porem sem esse path nao conseguimos acessar o django admin
     path("admin/", admin.site.urls, name = 'admin'),
-    # The 'receitas' app URLs are included here, under the 'receitas/' path.
+    # Links para as URLs de receitas
     path('', include('receitas.urls', namespace='receitas')),
-    # The 'usuarios' app URLs are included here, under the 'usuarios/' path.
+    # Links para as URLs de usuários
     path('', include('usuarios.urls', namespace='usuarios')),
+    # Link para a página inicial de segurança
+    path('seguranca/', views.homeSec, name='homeSec'),
+    # Link para a página de registro
+    path('seguranca/registro/', views.registro, name='sec-registro'),
 ]
