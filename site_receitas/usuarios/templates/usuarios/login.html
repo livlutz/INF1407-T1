@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8hE68aNjrXkE5E5h5l7O3O6j6N6p6c6" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/usuarios/style.css' %}">
+    <link rel="stylesheet" href="{% static 'usuarios/css/style.css' %}">
     <title>{{titulo_pagina}}</title>
 </head>
 <body>
     {% include 'usuarios/header.html'%}
     {% include 'usuarios/links.html'%}
     <h1>{{titulo_janela}}</h1>
-    <img src="{% static 'img/receitas/logo.png' %}" alt="Logo" class="logo-image">
+    <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
     <div class="login-container">
         <h2>Bem-vindo!</h2>
         <form action="" method="post">
