@@ -8,4 +8,5 @@ app_name = 'receitas'
 urlpatterns = [
     path('', views.PubReceitasListView.as_view(), name = 'homepage'),
     #path('receita/<int:id>/', views.VerReceita.as_view(), name = 'ver-receita')
+    path('receita/<int:id>/', views.VerReceita.as_view(), name = 'ver_receita'),
 ]

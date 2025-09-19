@@ -79,16 +79,11 @@ class ReceitasDeleteView(View):
         receita.delete()
         return HttpResponseRedirect(reverse_lazy("receitas:homepage"))
 
-
-"""class VerReceita(View):
+class VerReceita(View):
     def get(self, request, *args, **kwargs):
-        receita = Receita.objects.all()
+        receita = Receita.objects.get()
         contexto = { 'receita': receita,
-                    'titulo_pagina': 'Home',
-                    'titulo_janela': 'Receitas Publicas',
+                    'titulo_pagina': 'Ver receita',
+                    'titulo_janela': 'Vendo receita',
             }
-        return render(
-            request,
-            'receitas/ver-receita.html',
-            contexto)
-"""
+        return render(request,'receitas/ver_receita.html',contexto)

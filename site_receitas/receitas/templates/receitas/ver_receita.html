@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
+    <title>{{ titulo_pagina }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" inte></head>
+    <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
+
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <h1>{{titulo_janela}}</h1>
+    <p>{{receita.titulo}}</p><!--TODO : Tem ver com os cara lá né, temos q ver como q linka essa pag com as outras-->
+    <p>{{receita.ingredientes}}</p>
+    <p>{{receita.modo_de_preparo}}</p>
+    <p>{{receita.tempo_de_preparo}}</p>
+    <p>{{ receita.porcoes }}</p>
+    <p>{{ receita.categoria }}</p>
+    <p>{{ receita.autor.nome }}</p>
+    <!--TODO: tem q botar a foto da receita-->
+</body>
+</html>
+
