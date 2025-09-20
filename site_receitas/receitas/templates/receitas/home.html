@@ -12,7 +12,7 @@
 <body class="bg-gray-50 text-gray-800">
     {% include 'receitas/header.html' %}
 
-    <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
+    <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
 
     <!-- Header -->
     <header class="bg-white shadow-sm p-4 md:px-8">
@@ -53,7 +53,7 @@
                         <div class="p-6">
                             <h3 class="text-xl font-semibold mb-2">{{ receita.titulo }}</h3>
                             <p class="text-gray-600 mb-4">{{ receita.categoria|truncatewords:20 }}</p>
-                            <a href="#" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">Ver Receita</a>
+                           <a href="{% url 'receitas:ver_receita' receita.id %}" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">Ver Receita</a>
                         </div>
                     </div>
                 {% empty %}

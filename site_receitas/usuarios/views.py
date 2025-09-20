@@ -2,14 +2,19 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from usuarios.forms import UsuarioModel2Form
+from usuarios.forms import UsuarioModel2Form, UsuarioLoginForm
 from usuarios.models import Usuario
 from receitas.models import Receita
 
 # Create your views here.
 
 def login(request):
-    return render(request, 'usuarios/login.html')
+    contexto = {
+        'formulario': UsuarioLoginForm(),  # replace with your actual login form class
+        'titulo_janela': 'Login',
+        'titulo_pagina': 'Entrar',
+    }
+    return render(request, 'usuarios/login.html', contexto)
 
 def cadastro(request):
     return render(request, 'usuarios/cadastro.html')
