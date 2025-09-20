@@ -1,30 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{titulo.pagina}}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" inte></head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
-    <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
 </head>
-
-<body>
+<body class="bg-dark text-light">
     {% include 'usuarios/header.html'%}
     {% include 'usuarios/links.html'%}
-    <img src="{% static 'img/receitas/logo.png' %}" alt="Logo" class="logo-image">
-    <h1>{{titulo_janela}}</h1>
-    <form action="" method="POST">
-        <fieldset style="width: max-content;">
-            <legend>Formulário de adicionar receita</legend>
-            {% csrf_token %}
-            <table class="formulario">
-            {{ formulario.as_table }}
-            </table>
-            {% if mensagem %}
-                <p> {{ mensagem }} </p>
-            {% endif %}
-            <button type="submit" class = "btn btn-primary">Adicionar</button>
-        </fieldset>
-    </form>
+    <div class="criar-receita-container">
+        <div class="criar-receita-card">
+            <div class="criar-receita-logo">
+                <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
+            </div>
+            <h1 class="criar-receita-title">{{titulo_janela}}</h1>
+            <form action="" method="POST" class="criar-receita-form">
+                <fieldset>
+                    <legend class="criar-receita-legend">Formulário de adicionar receita</legend>
+                    {% csrf_token %}
+                    <table class="formulario">
+                        {{ formulario.as_table }}
+                    </table>
+                    {% if mensagem %}
+                        <p class="criar-receita-msg">{{ mensagem }}</p>
+                    {% endif %}
+                    <button type="submit" class="modern-btn">Adicionar</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 </body>

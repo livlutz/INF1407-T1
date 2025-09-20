@@ -3,8 +3,9 @@ Para incluir esse fragmento de página HTML
 em uma página HTML use:
 { % include 'contatos/links.html' % }
 -->
-<a href="/" class = "btn btn-primary">Home-Page</a>
-| <a href="{% url 'usuarios:login' %}" class = "btn btn-primary">Login</a>
-| <a href="{% url 'usuarios:cadastro' %}" class = "btn btn-primary">Cadastro</a>
-  <!--<a href="{ url 'perfil' pk=usuario.id %}" class = "btn btn-primary">Perfil</a>-->
-<hr>
+<div class="nav-fixed">
+  <a href="/" class="modern-btn">Home-Page</a>
+  <a href="{% url 'usuarios:login' %}" class="modern-btn">Login</a>
+  <a href="{% url 'usuarios:cadastro' %}" class="modern-btn">Cadastro</a>
+  <!-- <a href="{ url 'perfil' pk=usuario.id %}" class="modern-btn">Perfil</a> -->
+</div>
