@@ -18,8 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from . import views
-
+from site_receitas import views
 
 urlpatterns = [
     #seria bom renomear o admin ou excluir, porem sem esse path nao conseguimos acessar o django admin
