@@ -10,23 +10,7 @@
     </head>
     <body class="bg-dark text-light">
         {% include 'receitas/header.html' %}
-        <div class="logo-container">
-            <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
-        </div>
-        <!-- Header -->
-    <header class="bg-dark shadow-sm p-4 md:px-8">
-        <div class="header-flex">
-            <div class="header-left">
-                <div class="logo-container">
-                    <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
-                </div>
-                <nav class="nav-links">
-                    <a href="{% url 'usuarios:login' %}" class="modern-btn">Login</a>
-                    <a href="{% url 'usuarios:cadastro' %}" class="modern-btn">Cadastro</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+
         <!-- Hero Section -->
     <section class="hero-section py-20 px-4 text-center relative overflow-hidden">
             <div class="container mx-auto relative z-10">
@@ -59,12 +43,6 @@
                 </div>
             </section>
         </main>
-        <!-- Footer -->
-    <footer class="bg-dark text-light py-6 mt-12">
-            <div class="container mx-auto text-center">
-                <p>&copy; 2025 Receitinhas da vovó. Todos os direitos reservados.</p>
-            </div>
-        </footer>
     </body>
 </html>
 

@@ -10,12 +10,8 @@
 </head>
 <body class="bg-dark text-light">
     {% include 'usuarios/header.html'%}
-    {% include 'usuarios/links.html'%}
     <div class="criar-receita-container">
         <div class="criar-receita-card">
-            <div class="criar-receita-logo">
-                <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
-            </div>
             <h1 class="criar-receita-title">{{titulo_janela}}</h1>
             <form action="" method="POST" class="criar-receita-form">
                 <fieldset>

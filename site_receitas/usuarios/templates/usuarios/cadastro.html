@@ -19,7 +19,6 @@
             <h1 class="cadastro-title">{{titulo_janela}}</h1>
             <form action="" method="POST" class="cadastro-form">
                 <fieldset>
-                    <legend class="cadastro-legend">Formulário de Cadastro</legend>
                     {% csrf_token %}
                     <table class="formulario">
                         {{ formulario.as_table }}

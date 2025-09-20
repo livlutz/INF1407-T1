@@ -1,11 +1,11 @@
 <!--
 Para incluir esse fragmento de página HTML
 em uma página HTML use:
-{ % include 'contatos/links.html' % }
+{ % include 'usuarios/links.html' % }
 -->
-<div class="nav-fixed">
+<nav class="nav-links">
   <a href="/" class="modern-btn">Home-Page</a>
   <a href="{% url 'usuarios:login' %}" class="modern-btn">Login</a>
   <a href="{% url 'usuarios:cadastro' %}" class="modern-btn">Cadastro</a>
   <!-- <a href="{ url 'perfil' pk=usuario.id %}" class="modern-btn">Perfil</a> -->
-</div>
+</nav>
