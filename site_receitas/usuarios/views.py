@@ -1,19 +1,32 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from usuarios.forms import UsuarioModel2Form
+from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm
 from usuarios.models import Usuario
 from receitas.models import Receita
+from django.contrib.auth import login as auth_login  
+
 
 # Create your views here.
 
 def login(request):
-    return render(request, 'usuarios/login.html')
+    if request.method == 'POST':
+        formulario = UsuarioLoginForm(request.POST)
+        if formulario.is_valid():
+            auth_login(request, formulario.user)
+            return redirect('receitas:homepage')  
+    else:
+        formulario = UsuarioLoginForm()
+    
+    contexto = {
+        'formulario': formulario,
+        'titulo_janela': 'Login',
+        'titulo_pagina': 'Entrar',
+    }
+    return render(request, 'usuarios/login.html', contexto)
 
-def cadastro(request):
-    return render(request, 'usuarios/cadastro.html')
-
+    
 def perfil(request):
     return render(request, 'usuarios/perfil.html')
 
@@ -23,7 +36,7 @@ def deletar(request):
 #cria o usuario
 class UsuarioCreateView(View):
     def get(self, request, *args, **kwargs):
-        contexto = { 'formulario': UsuarioModel2Form,
+        contexto = { 'formulario': CustomUserCreationForm,
                      'titulo_janela' : 'Cadastro',
                     'titulo_pagina': 'Cadastrar Usuário',
                     'botao' : 'Cadastrar',}
@@ -31,7 +44,7 @@ class UsuarioCreateView(View):
         return render(request, "usuarios/cadastro.html", contexto)
 
     def post(self, request, *args, **kwargs):
-        formulario = UsuarioModel2Form(request.POST)
+        formulario = CustomUserCreationForm(request.POST)
         if formulario.is_valid():
             usuario = formulario.save()
             usuario.save()
@@ -45,7 +58,7 @@ class UsuarioReadView(View):
     def get(self, request, *args, **kwargs):
         usuario = Usuario.objects.get(pk=id)
         contexto = {'usuario': usuario,
-                    'formulario': UsuarioModel2Form(instance=usuario),
+                    'formulario': CustomUserCreationForm(instance=usuario),
                     'titulo_janela' : 'Perfil',
                     'titulo_pagina': 'Perfil do Usuário',
                     'botao' : 'Ver meu perfil',}
@@ -55,7 +68,7 @@ class UsuarioReadView(View):
 class UsuarioUpdateView(View):
     def get(self, request, *args, **kwargs):
         usuario = Usuario.objects.get(pk=id)
-        formulario = UsuarioModel2Form(instance=usuario)
+        formulario = CustomUserCreationForm(instance=usuario)
         contexto = {'formulario': formulario,
                     'titulo_janela' : 'Atualizar conta',
                     'titulo_pagina': 'Atualizar Perfil do Usuário',
@@ -64,7 +77,7 @@ class UsuarioUpdateView(View):
 
     def post(self, request, *args, **kwargs):
         usuario = get_object_or_404(Usuario, pk=id)
-        formulario = UsuarioModel2Form(request.POST, instance=usuario)
+        formulario = CustomUserCreationForm(request.POST, instance=usuario)
         if formulario.is_valid():
             usuario = formulario.save()
             usuario.save()

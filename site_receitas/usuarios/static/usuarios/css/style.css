@@ -1,86 +1,247 @@
+/* Profile Card Styles */
+.profile-card {
+  background: #232323;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.32);
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-avatar {
+  margin-bottom: 1rem;
+}
+.profile-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #ff9800;
+  text-align: center;
+}
+.profile-email {
+  color: #ffe0b2;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.modern-btn.danger {
+  background: linear-gradient(90deg, #ff3b3b 60%, #ff9800 100%);
+  color: #fff;
+}
+.modern-btn.secondary {
+  background: linear-gradient(90deg, #ffe0b2 60%, #ff9800 100%);
+  color: #232323;
+}
+/* login page styles */
+.login-card {
+  background: #232323;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.32);
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-logo {
+  margin-bottom: 1rem;
+}
+.login-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #ff9800;
+  text-align: center;
+}
+.login-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.login-legend {
+  font-size: 1.2rem;
+  color: #ff9800;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+.login-msg {
+  color: #ffe0b2;
+  background: #232323;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.signup-link {
+  margin-top: 1rem;
+  text-align: center;
+  color: #ffe0b2;
+}
+.signup-link a {
+  color: #ff9800;
+  font-weight: 600;
+  text-decoration: underline;
+}
+/* Fixed navigation for links.html */
+.nav-fixed {
+  position: fixed;
+  top: 18px;
+  left: 120px;
+  z-index: 1200;
+  display: flex;
+  gap: 1rem;
+}
+.modern-btn {
+  background: linear-gradient(90deg, #ff9800 60%, #ff9800 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  box-shadow: 0 2px 8px rgba(255,152,0,0.12);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  outline: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.modern-btn:hover, .modern-btn:focus {
+  background: linear-gradient(90deg, #232323 60%, #ff9800 100%);
+  color: #ff9800;
+  transform: translateY(-2px) scale(1.04);
+}
 
-   body {
-        font-family: sans-serif;
-        background-color: #f4f4f4;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
 
-    /*.formulario{
-        font-family: Arial, sans-serif;
-        background-color: #f9f9f9;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        margin: auto;
-    }*/
+/* cadastro page styles */
+.cadastro-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #181818;
+}
+.cadastro-card {
+  background: #232323;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.32);
+  max-width: 400px;
+  width: 100%;
+  padding: 2rem;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.cadastro-logo {
+  margin-bottom: 1rem;
+}
+.cadastro-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.formulario {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.formulario input, .formulario textarea, .formulario select {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid #fff;
+  background: #232323;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.cadastro-msg {
+  color: #ffe0b2;
+  background: #232323;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.login-link {
+  margin-top: 1rem;
+  text-align: center;
+  color: #ffe0b2;
+}
 
-    .login-container {
-        background-color: #fff;
-        padding: 40px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 300px;
-        text-align: center;
-    }
+.login-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
 
-    .login-container h2 {
-        margin-bottom: 24px;
-        color: #333;
-    }
+.login-container h2 {
+    margin-bottom: 24px;
+    color: #333;
+}
 
-    .input-group {
-        margin-bottom: 15px;
-        text-align: left;
-    }
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
 
-    .input-group label {
-        display: block;
-        margin-bottom: 8px;
-        color: #555;
-    }
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+}
 
-    .input-group input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box; /* Ensures padding doesn't affect the width */
-    }
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't affect the width */
+}
 
-    .login-btn {
-        width: 100%;
-        padding: 10px;
-        background-color: #ff6347; /* A tomato-like color for a recipe theme */
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        margin-top: 10px;
-    }
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #45c241; /* A tomato-like color for a recipe theme */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
 
-    .login-btn:hover {
-        background-color: #ff452c;
-    }
+.login-btn:hover {
+    background-color: #45c241;
+}
 
-    .forgot-password {
-        margin-top: 15px;
-        font-size: 14px;
-    }
+.forgot-password {
+    margin-top: 15px;
+    font-size: 14px;
+}
 
-    .forgot-password a {
-        color: #ff6347;
-        text-decoration: none;
-    }
+.forgot-password a {
+    color: #45c241;
+    text-decoration: none;
+}
 
-    .forgot-password a:hover {
-        text-decoration: underline;
-    }
+.forgot-password a:hover {
+    text-decoration: underline;
+}
 
     /*
 Para incluir essa folha de estilo, utilize:
@@ -89,35 +250,35 @@ href="{% static 'contatos/css/estilo.css' %}">
 Não se esqueça de incluir a tag {% load static %}
 */
 /* Ajuda de formulário */
-    .helptext {font-size: 10px;}
-/* Lista de erros no formulário */.errorlist {color: #FF0000;list-style-type: none;}/* somente th dentro de uma tag da classe formulário */
-    .formulario th {
-        text-align: right;
-        vertical-align: text-top;
-    }
-
-    /* Estilos para a imagem do logo */
-.logo-image {
-    /* Define a altura da imagem */
-    height: 60px;
-    /* Garante que a imagem não seja esticada */
-    width: auto;
-    /* Adiciona bordas arredondadas */
-    border-radius: 8px;
-    /* Efeito de transição suave */
-    transition: transform 0.3s ease;
+.helptext {font-size: 10px;}
+/* Lista de erros no formulário */
+.errorlist {color: #FF0000;list-style-type: none;}/* somente th dentro de uma tag da classe formulário */
+.formulario th {
+    text-align: right;
+    vertical-align: text-top;
 }
 
-    /* Efeito de escala quando o mouse passa sobre o logo */
-    .logo-image:hover {
-        /* Aumenta a imagem em 5% */
-        transform: scale(1.05);
+.logo-fixed {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 1100;
+}
+.logo-image {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  transition: transform 0.3s;
+}
+.logo-image:hover {
+  transform: scale(1.08);
+}
+/* Estilos para telas menores (responsividade) */
+@media (max-width: 768px) {
+    .logo-image {
+        /* Reduz o tamanho do logo em telas menores */
+        height: 50px;
     }
-
-    /* Estilos para telas menores (responsividade) */
-    @media (max-width: 768px) {
-        .logo-image {
-            /* Reduz o tamanho do logo em telas menores */
-            height: 50px;
-        }
-    }
+}

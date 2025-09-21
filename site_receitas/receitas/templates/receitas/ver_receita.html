@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo_pagina }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
+</head>
+<body class="bg-dark text-light">
+    {% include 'receitas/header.html' %}
+    <div class="ver-receita-container">
+        <div class="ver-receita-card">
+            <div class="ver-receita-img-wrap">
+                <img src="{{ receita.foto_da_receita }}" alt="{{ receita.titulo }}" class="ver-receita-img">
+            </div>
+            <div class="ver-receita-content">
+                <h1 class="ver-receita-title">{{ receita.titulo }}</h1>
+                <div class="ver-receita-meta">
+                    <span class="ver-receita-cat">{{ receita.categoria }}</span>
+                    <span class="ver-receita-time">⏱️ {{ receita.tempo_de_preparo }}</span>
+                    <span class="ver-receita-porc">🍽️ {{ receita.porcoes }} porções</span>
+                    <span class="ver-receita-author">👤 {{ receita.autor.nome }}</span>
+                </div>
+                <h2 class="ver-receita-section">Ingredientes</h2>
+                <ul class="ver-receita-list">
+                    {% for ingrediente in receita.ingredientes.splitlines %}
+                        <li>{{ ingrediente }}</li>
+                    {% endfor %}
+                </ul>
+                <h2 class="ver-receita-section">Modo de Preparo</h2>
+                <p class="ver-receita-prep">{{ receita.modo_de_preparo }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
