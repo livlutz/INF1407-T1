@@ -1,6 +1,6 @@
 from django.db import models
 from usuarios.models import Usuario
-
+from site_receitas import settings
 # Create your models here.
 
 """Criando a classe receita
@@ -19,7 +19,7 @@ class Receita(models.Model):
     foto_da_receita = models.ImageField(upload_to='img/receitas', null=True, blank=True)
 
     visibilidade = models.CharField(max_length=10, choices=[('pub', 'Pub'), ('priv', 'Priv')], default='Pub', help_text='Defina se a receita é pública ou privada (Pub ou Priv)')
-    autor = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='receitas')
+    autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         app_label = 'receitas'
