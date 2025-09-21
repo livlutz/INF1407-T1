@@ -16,7 +16,7 @@ class Receita(models.Model):
     categoria = models.CharField(max_length=100, help_text='Categoria da receita (ex: sobremesa, prato principal, etc.)')
 
     #ele nao ta salvando a imagem no lugar certo de jeito nenhum
-    foto_da_receita = models.ImageField(upload_to='img/receitas', null=True, blank=True)
+    foto_da_receita = models.ImageField(upload_to='receitas/img', null=True, blank=True)
 
     visibilidade = models.CharField(max_length=10, choices=[('pub', 'Pub'), ('priv', 'Priv')], default='Pub', help_text='Defina se a receita é pública ou privada (Pub ou Priv)')
     autor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
