@@ -1,24 +1,32 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm
 from usuarios.models import Usuario
 from receitas.models import Receita
+from django.contrib.auth import login as auth_login  
+
 
 # Create your views here.
 
 def login(request):
+    if request.method == 'POST':
+        formulario = UsuarioLoginForm(request.POST)
+        if formulario.is_valid():
+            auth_login(request, formulario.user)
+            return redirect('receitas:homepage')  
+    else:
+        formulario = UsuarioLoginForm()
+    
     contexto = {
-        'formulario': UsuarioLoginForm(),  # replace with your actual login form class
+        'formulario': formulario,
         'titulo_janela': 'Login',
         'titulo_pagina': 'Entrar',
     }
     return render(request, 'usuarios/login.html', contexto)
 
-def cadastro(request):
-    return render(request, 'usuarios/cadastro.html')
-
+    
 def perfil(request):
     return render(request, 'usuarios/perfil.html')
 
