@@ -13,7 +13,7 @@
     <div class="ver-receita-container">
         <div class="ver-receita-card">
             <div class="ver-receita-img-wrap">
-                <img src="{{ receita.foto_da_receita }}" alt="{{ receita.titulo }}" class="ver-receita-img">
+                <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="ver-receita-img">
             </div>
             <div class="ver-receita-content">
                 <h1 class="ver-receita-title">{{ receita.titulo }}</h1>
@@ -21,7 +21,7 @@
                     <span class="ver-receita-cat">{{ receita.categoria }}</span>
                     <span class="ver-receita-time">⏱️ {{ receita.tempo_de_preparo }}</span>
                     <span class="ver-receita-porc">🍽️ {{ receita.porcoes }} porções</span>
-                    <span class="ver-receita-author">👤 {{ receita.autor.nome }}</span>
+                    <span class="ver-receita-author">👤 {{ receita.autor.username }}</span>
                 </div>
                 <h2 class="ver-receita-section">Ingredientes</h2>
                 <ul class="ver-receita-list">
