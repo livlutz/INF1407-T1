@@ -10,63 +10,8 @@ Este é um projeto de um site de receitas, desenvolvido com Django. add descrica
 
 # ⚙️ Configuração do Ambiente
 
-Para rodar este projeto, você precisará configurar um **ambiente virtual (venv)**.
+Para rodar este projeto, vá no terminal e use o comando **./run.sh**
+Ele vai preparar todo o ambiente e abrir o site localmente.
 
-### ❗Observações
-O projeto foi desenvolvido em ambiente Linux por meio do Github Codespaces.
-
-A instalção do pacote Pillow será necessário para usar ImageTextField, para isso, no ambiente virtual:
-
-```bash
-    pip install Pillow
-```
-
-Nome do ambiente virtual: `venv`
-
----
-
-## Comandos Úteis
-
-Siga os passos abaixo para configurar e executar o projeto:
-
-* **Crie o ambiente virtual**:
-    ```bash
-    python -m venv venv
-    ```
-
-* **Ative o ambiente virtual**:
-    ```bash
-    source venv/bin/activate
-    ```
-
-* **Instale as dependências (incluindo o Django)**:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
-* **Verifique a instalação e a versão do Django**:
-    ```bash
-    django-admin --version
-    ```
-
-* **Aplique as migrações do banco de dados**:
-    ```bash
-    python manage.py migrate
-    ```
-
-* **Execute o servidor de desenvolvimento**:
-    ```bash
-    python manage.py runserver
-    ```
-
+# Acesso do site
 Após executar este comando, você poderá acessar o site em `http://127.0.0.1:8000/` no seu navegador, ou ir na aba Ports do terminal e clicar no link da porta 8000, ou clicar no pop up que aparecerá no canto direito inferior da tela no botão "open in browser"
-
-* **Após adicionar classes no models.py**:
-    ```bash
-    python manage.py makemigrations
-    ```
-    e depois
-
-    ```bash
-    python manage.py migrate
-    ```
