@@ -250,7 +250,7 @@ href="{% static 'contatos/css/estilo.css' %}">
 Não se esqueça de incluir a tag {% load static %}
 */
 /* Ajuda de formulário */
-.helptext {font-size: 10px;}
+.helptext {font-size: 12px;}
 /* Lista de erros no formulário */
 .errorlist {color: #FF0000;list-style-type: none;}/* somente th dentro de uma tag da classe formulário */
 .formulario th {

@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm
 from usuarios.models import Usuario
 from receitas.models import Receita
-from django.contrib.auth import login as auth_login  
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -15,10 +16,10 @@ def login(request):
         formulario = UsuarioLoginForm(request.POST)
         if formulario.is_valid():
             auth_login(request, formulario.user)
-            return redirect('receitas:homepage')  
+            return redirect('receitas:homepage')
     else:
         formulario = UsuarioLoginForm()
-    
+
     contexto = {
         'formulario': formulario,
         'titulo_janela': 'Login',
@@ -26,9 +27,19 @@ def login(request):
     }
     return render(request, 'usuarios/login.html', contexto)
 
-    
-def perfil(request):
-    return render(request, 'usuarios/perfil.html')
+@login_required
+def logout_confirm(request):
+    return render(request, 'usuarios/logout.html')
+
+@login_required
+def perfil(request, id):
+    usuario = get_object_or_404(Usuario, pk=id)
+    contexto = {
+        'usuario': usuario,
+        'titulo_janela': 'Perfil',
+        'titulo_pagina': 'Perfil do Usuário',
+    }
+    return render(request, 'usuarios/perfil.html', contexto)
 
 def deletar(request):
     return render(request, 'usuarios/deletar.html')
@@ -111,3 +122,6 @@ class ReceitaListView(View):
                     'titulo_janela' : 'Minhas Receitas',
                     'titulo_pagina': 'Receitas do Usuário',}
         return render(request, "usuarios/perfil.html", contexto)
+
+
+#usuario1 - s12345678@ - u@gmail.com
