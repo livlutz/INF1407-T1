@@ -13,23 +13,16 @@
     <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
     <div class="login-container">
         <h2>{{titulo_janela}}</h2>
-        <form action="#" method="post">
-            <div class="input-group">
-                <label for="username">Nome de Usuário ou Email</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="senha" required>
-            </div>
-            <button type="submit" class="login-btn">Entrar</button>
+        <p>{{subtitulo_janela}}</p>
+        {% block content %}
+        <form method="post">
+            {% csrf_token %}
+            <table class="formulario">
+                {{ form.as_table }}
+            </table>
+            <button type="submit" class="btn btn-primary">{{botao_texto}}</button>
         </form>
-        <div class="forgot-password">
-            <a href="#">Esqueceu sua senha?</a>
-        </div>
-        <div class="signup-link">
-            Não tem uma conta? <a href="cadastro.html">Cadastre-se</a>
-        </div>
+        {% endblock %}
     </div>
 </body>
 </html>

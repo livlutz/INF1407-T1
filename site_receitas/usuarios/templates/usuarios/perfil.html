@@ -88,6 +88,7 @@
         <div class="profile-actions">
             <a href="{% url 'usuarios:atualizar_perfil' usuario.id %}">Atualizar Perfil</a>
             <a href="{% url 'usuarios:deletar' usuario.id %}" class="danger">Deletar Conta</a>
+            <a href="{% url 'usuarios:sec-password-change' usuario.id %}" class="secondary">Trocar Senha</a>
             <a href="{% url 'usuarios:minhas_receitas' usuario.id %}" class="secondary">Minhas Receitas</a>
         </div>
         <div class="profile-assets">
@@ -100,3 +101,5 @@
     </div>
 </body>
 </html>
+
+<!--TODO:falta colocar a opcao de troca de senha!!!!-->

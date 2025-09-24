@@ -41,9 +41,6 @@ def perfil(request, id):
     }
     return render(request, 'usuarios/perfil.html', contexto)
 
-def deletar(request):
-    return render(request, 'usuarios/deletar.html')
-
 #cria o usuario
 class UsuarioCreateView(View):
     def get(self, request, *args, **kwargs):
