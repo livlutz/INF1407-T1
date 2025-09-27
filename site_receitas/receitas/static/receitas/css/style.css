@@ -1,10 +1,12 @@
-/* Fixed logo at top left for cadastro page */
+/*Coloca logo fixo no canto superior esquerdo das páginas*/
 .logo-fixed {
   position: fixed;
   top: 18px;
   left: 18px;
   z-index: 1100;
 }
+
+/*Ajusta a imagem do logo para um circulo*/
 .logo-image {
   height: 80px;
   width: 80px;
@@ -13,10 +15,17 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.18);
   transition: transform 0.3s;
 }
+
+/*Animacao hover na logo*/
 .logo-image:hover {
   transform: scale(1.08);
 }
-/* Fixed header for cadastro page */
+
+.logo-container {
+  margin-right: 0.5rem;
+}
+
+/* Header fixo para as páginas */
 .header-fixed {
   position: fixed;
   top: 0;
@@ -28,34 +37,12 @@
   border-bottom-right-radius: 1.5rem;
   box-shadow: 0 2px 12px rgba(0,0,0,0.18);
 }
+
+/* Header Flex Layout */
 .header-flex {
   display: flex;
   align-items: center;
   gap: 2rem;
-}
-.logo-container {
-  margin-right: 0.5rem;
-}
-.nav-links {
-  display: flex;
-  gap: 1rem;
-}
-.logo-image {
-  height: 70px;
-  width: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  transition: transform 0.3s;
-}
-.logo-image:hover {
-  transform: scale(1.08);
-}
-/* Header Flex Layout for cadastro page */
-.header-flex {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
 }
 
 .header-left {
@@ -65,26 +52,12 @@
   margin-left: 3rem;
 }
 
-.logo-container {
-  margin-right: 0.5rem;
-}
 
 .nav-links {
   display: flex;
   gap: 1rem;
 }
 
-.logo-image {
-  height: 90px;
-  width: 90px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  transition: transform 0.3s;
-}
-.logo-image:hover {
-  transform: scale(1.08);
-}
 /* criarReceita page styles */
 .criar-receita-container {
   display: flex;
@@ -106,9 +79,12 @@
   align-items: center;
   padding: 2rem;
 }
+
 .criar-receita-logo {
   margin-bottom: 1rem;
 }
+
+
 .criar-receita-title {
   font-size: 2rem;
   font-weight: bold;
@@ -116,11 +92,15 @@
   color: #ff9800;
   text-align: center;
 }
+
+
 .criar-receita-form fieldset {
   border: none;
   padding: 0;
   margin: 0;
 }
+
+
 .criar-receita-legend {
   font-size: 1.2rem;
   color: #ff9800;
@@ -128,11 +108,15 @@
   font-weight: 600;
   text-align: center;
 }
+
+
 .formulario {
   width: 100%;
   margin-bottom: 1rem;
   color: #fff;
 }
+
+
 .formulario input, .formulario textarea, .formulario select {
   width: 100%;
   padding: 0.5rem;
@@ -142,6 +126,8 @@
   color: #fff;
   margin-bottom: 0.5rem;
 }
+
+
 .criar-receita-msg {
   color: #ffe0b2;
   background: #232323;
@@ -150,6 +136,8 @@
   margin-bottom: 1rem;
   text-align: center;
 }
+
+
 /* ver_receita page styles */
 .ver-receita-container {
   display: flex;
@@ -159,6 +147,8 @@
   background: #181818;
   padding: 2rem 0;
 }
+
+
 .ver-receita-card {
   background: linear-gradient(135deg, #232323 80%, #ff9800 100%);
   border-radius: 2rem;
@@ -171,12 +161,16 @@
   align-items: center;
   padding: 2rem;
 }
+
+
 .ver-receita-img-wrap {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 1.5rem;
 }
+
+
 .ver-receita-img {
   width: 320px;
   height: 220px;
@@ -184,9 +178,13 @@
   border-radius: 1.5rem;
   box-shadow: 0 4px 16px rgba(0,0,0,0.18);
 }
+
+
 .ver-receita-content {
   width: 100%;
 }
+
+
 .ver-receita-title {
   font-size: 2.2rem;
   font-weight: bold;
@@ -195,6 +193,8 @@
   text-align: center;
   font-style: italic;
 }
+
+
 .ver-receita-meta {
   display: flex;
   flex-wrap: wrap;
@@ -203,6 +203,8 @@
   margin-bottom: 1.5rem;
   font-size: 1rem;
 }
+
+
 .ver-receita-cat, .ver-receita-time, .ver-receita-porc, .ver-receita-author {
   background: #232323;
   color: #ffe0b2;
@@ -210,18 +212,24 @@
   padding: 0.3rem 1rem;
   font-weight: 500;
 }
+
+
 .ver-receita-section {
   font-size: 1.3rem;
   color: #ff9800;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
 }
+
+
 .ver-receita-list {
   list-style: disc inside;
   margin-bottom: 1.5rem;
   color: #fff;
   padding-left: 1rem;
 }
+
+
 .ver-receita-prep {
   color: #ffe0b2;
   background: #232323;
@@ -230,6 +238,8 @@
   font-size: 1.05rem;
   margin-bottom: 1rem;
 }
+
+
 /* Horizontally scrollable receitas section */
 .receitas-scroll {
   display: flex;
@@ -238,6 +248,8 @@
   padding-bottom: 1.5rem;
   scroll-snap-type: x mandatory;
 }
+
+
 .receitas-scroll > div {
   min-width: 320px;
   flex: 0 0 auto;
@@ -248,32 +260,13 @@
   transition: transform 0.3s, box-shadow 0.3s;
   margin-bottom: 1rem;
 }
+
+
 .receitas-scroll > div:hover {
   transform: translateY(-6px) scale(1.04);
   box-shadow: 0 12px 24px rgba(0,0,0,0.32);
 }
-/* Header Flex Layout */
-.header-flex {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 3.5rem;
-  margin-left: 6.5rem;
-}
-
-.logo-container {
-  margin-right: 0.5rem;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1rem;
-}
 
 .modern-btn {
   background: linear-gradient(90deg, #ff9800 60%, #ff9800 100%);
@@ -291,6 +284,8 @@
   cursor: pointer;
   display: inline-block;
 }
+
+
 .modern-btn:hover, .modern-btn:focus {
   background: linear-gradient(90deg, #ff9800 60%, #ff9800 100%);
   color: #fff;
@@ -311,26 +306,6 @@ header {
   padding: 1rem 0;
 }
 
-
-.logo-container {
-  position: absolute;
-  top: 24px;
-  left: 32px;
-  z-index: 100;
-}
-
-.logo-image {
-  height: 90px;
-  width: 90px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-  transition: transform 0.3s;
-}
-
-.logo-image:hover {
-  transform: scale(1.08);
-}
 
 .hero-section {
   background: linear-gradient(90deg, #ff9800 60%, #232323 100%);
