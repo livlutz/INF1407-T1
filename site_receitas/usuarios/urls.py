@@ -18,4 +18,5 @@ urlpatterns = [
     path('logout/real/', LogoutView.as_view(next_page=reverse_lazy('receitas:homepage')), name='logout'),
     path('password_change_form/<int:id>/', PasswordChangeView.as_view(template_name='usuarios/password_change_form.html', success_url=reverse_lazy('usuarios:sec-password-change-done', kwargs={'id': id})), name='sec-password-change'),
     path('password_change_done/<int:id>/', PasswordChangeDoneView.as_view(template_name='usuarios/password_change_done.html'), name='sec-password-change-done'),
+    path('perfil/ver_receitas/<int:id>/', views.ReceitaListView.as_view(), name='ver_minhas_receitas'),
 ]

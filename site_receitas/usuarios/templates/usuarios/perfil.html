@@ -89,7 +89,8 @@
             <a href="{% url 'usuarios:atualizar_perfil' usuario.id %}">Atualizar Perfil</a>
             <a href="{% url 'usuarios:deletar' usuario.id %}" class="danger">Deletar Conta</a>
             <a href="{% url 'usuarios:sec-password-change' usuario.id %}" class="secondary">Trocar Senha</a>
-            <a href="{% url 'usuarios:minhas_receitas' usuario.id %}" class="secondary">Minhas Receitas</a>
+            <a href="{% url 'usuarios:ver_minhas_receitas' usuario.id %}" class="secondary">Minhas Receitas</a>
+            <a href="{% url 'receitas:criar_receita' %}" class="secondary">Criar Receita</a>
         </div>
         <div class="profile-assets">
             <h4>Outros dados</h4>

@@ -129,7 +129,7 @@ class ReceitaListView(View):
             'titulo_janela': 'Minhas Receitas',
             'titulo_pagina': 'Receitas do Usuário',
         }
-        return render(request, "usuarios/minhas_receitas.html", contexto)
+        return render(request, "usuarios/ver_minhas_receitas.html", contexto)
 
 
 #usuario1 - s12345678@ - u@gmail.com
