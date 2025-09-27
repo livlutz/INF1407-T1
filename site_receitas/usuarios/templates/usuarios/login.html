@@ -4,27 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8hE68aNjrXkE5E5h5l7O3O6j6N6p6c6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'usuarios/css/style.css' %}">
     <title>{{titulo_pagina}}</title>
 </head>
-<body>
+<body class="bg-dark text-light">
     {% include 'usuarios/header.html'%}
     {% include 'usuarios/links.html'%}
-    <h1>{{titulo_janela}}</h1>
-    <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
-    <div class="login-container">
-        <h2>Bem-vindo!</h2>
-        <form action="" method="post">
-            <fieldset style="width: max-content;">
-                <legend>Formulário de Login</legend>
+    <div class="login-card">
+        <div class="login-logo">
+            <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
+        </div>
+        <h1 class="login-title">{{titulo_janela}}</h1>
+        <form action="" method="post" class="login-form">
+            <fieldset>
+                <legend class="login-legend">Formulário de Login</legend>
                 {% csrf_token %}
                 <table class="formulario">
                 {{ formulario.as_table }}
                 </table>
                 {% if mensagem %}
-                    <p> {{ mensagem }} </p>
+                    <p class="login-msg">{{ mensagem }}</p>
                 {% endif %}
+                <button type="submit" class="modern-btn">Login</button>
             </fieldset>
         </form>
         <div class="signup-link">

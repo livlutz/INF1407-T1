@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo_pagina }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
+</head>
+<body class="bg-dark text-light">
+    {% include 'receitas/header.html' %}
+    <div class="ver-receita-container">
+        <div class="ver-receita-card">
+            <div class="ver-receita-img-wrap">
+                {% if receita.foto_da_receita %}
+                    <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="recipe-img">
+                {% else %}
+                    <img src="{% static 'receitas/img/default-recipe.png' %}" alt="{{ receita.titulo }}" class="recipe-img">
+                {% endif %}
+            </div>
+            <div class="ver-receita-content">
+                <h1 class="ver-receita-title">{{ receita.titulo }}</h1>
+                <div class="ver-receita-meta">
+                    <span class="ver-receita-cat">categoria {{ receita.categoria }}</span>
+                    <span class="ver-receita-time">⏱️ {{ receita.tempo_de_preparo }} minutos</span>
+                    <span class="ver-receita-porc">🍽️ {{ receita.porcoes }} porções</span>
+                    <span class="ver-receita-author">👤autor {{ receita.autor.username }}</span>
+                </div>
+
+                <!-- Author-only action buttons -->
+                {% if user.is_authenticated and user == receita.autor %}
+                    <div class="recipe-actions mt-3 mb-4">
+                        <a href="{% url 'receitas:editar_receita' receita.id %}" class="btn btn-warning mr-2">
+                            <i class="fas fa-edit"></i> Editar Receita
+                        </a>
+                        <a href="{% url 'receitas:deletar_receita' receita.id %}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar esta receita?')">
+                            <i class="fas fa-trash"></i> Deletar Receita
+                        </a>
+                    </div>
+                {% endif %}
+
+                <h2 class="ver-receita-section">Ingredientes</h2>
+                <ul class="ver-receita-list">
+                    {% for ingrediente in receita.ingredientes.splitlines %}
+                        <li>{{ ingrediente }}</li>
+                    {% endfor %}
+                </ul>
+                <h2 class="ver-receita-section">Modo de Preparo</h2>
+                <p class="ver-receita-prep">{{ receita.modo_de_preparo }}</p>
+
+                <div class="mt-4">
+                    <a href="{% url 'receitas:homepage' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Voltar às Receitas
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

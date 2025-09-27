@@ -15,7 +15,7 @@
             <h1 class="criar-receita-title">{{titulo_janela}}</h1>
             <form action="" method="POST" class="criar-receita-form">
                 <fieldset>
-                    <legend class="criar-receita-legend">Formulário de adicionar receita</legend>
+                    <legend class="criar-receita-legend">Formulário de atualizar receita</legend>
                     {% csrf_token %}
                     <table class="formulario">
                         {{ formulario.as_table }}
@@ -23,9 +23,10 @@
                     {% if mensagem %}
                         <p class="criar-receita-msg">{{ mensagem }}</p>
                     {% endif %}
-                    <button type="submit" class="modern-btn">Adicionar</button>
+                    <button type="submit" class="modern-btn">Atualizar</button>
                 </fieldset>
             </form>
         </div>
     </div>
 </body>
+</html>

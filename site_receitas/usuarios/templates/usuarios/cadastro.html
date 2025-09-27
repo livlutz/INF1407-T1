@@ -4,30 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8hE68aNjrXkE5E5h5l7O3O6j6N6p6c6" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <title>{{titulo_pagina}}</title>
     <link rel="stylesheet" href="{% static 'usuarios/css/style.css' %}">
 </head>
-<body>
+<body class="bg-dark text-light">
     {% include 'usuarios/header.html'%}
     {% include 'usuarios/links.html'%}
-    <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
-    <h1>{{titulo_janela}}</h1>
-    <form action="" method="POST">
-        <fieldset style="width: max-content;">
-            <legend>Formulário de Cadastro</legend>
-            {% csrf_token %}
-            <table class="formulario">
-            {{ formulario.as_table }}
-            </table>
-            {% if mensagem %}
-                <p> {{ mensagem }} </p>
-            {% endif %}
-            <button type="submit" class = "btn btn-primary">Cadastrar</button>
-        </fieldset>
-    </form>
-    <div class="login-link">
-        Já tem uma conta? <a href="{% url 'usuarios:login' %}">Login</a>
+    <div class="logo-fixed">
+        <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
+    </div>
+    <div class="cadastro-container">
+        <div class="cadastro-card">
+            <h1 class="cadastro-title">{{titulo_janela}}</h1>
+            <form action="" method="POST" class="cadastro-form">
+                <fieldset>
+                    {% csrf_token %}
+                    <table class="formulario">
+                        {{ formulario.as_table }}
+                    </table>
+                    {% if mensagem %}
+                        <p class="cadastro-msg">{{ mensagem }}</p>
+                    {% endif %}
+                    <button type="submit" class="modern-btn">Cadastrar</button>
+                </fieldset>
+            </form>
+            <div class="login-link">
+                Já tem uma conta? <a href="{% url 'usuarios:login' %}">Login</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
