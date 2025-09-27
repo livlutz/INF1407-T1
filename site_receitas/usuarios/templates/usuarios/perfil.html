@@ -4,25 +4,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" inte></head>
-    <link rel="stylesheet" href="{% static 'usuarios/css/style.css' %}">
-    <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
     <title>{{titulo_pagina}}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #181818;
+            color: #f1f1f1;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .profile-card {
+            background: #23272a;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 32px 24px;
+            text-align: center;
+        }
+        .profile-avatar img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #444;
+            margin-bottom: 16px;
+            background: #333;
+        }
+        .profile-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .profile-email {
+            font-size: 1.1rem;
+            color: #bdbdbd;
+            margin-bottom: 16px;
+        }
+        .profile-actions a {
+            display: inline-block;
+            margin: 8px 6px;
+            padding: 10px 22px;
+            border-radius: 8px;
+            background: #5865f2;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .profile-actions a.danger {
+            background: #d32f2f;
+        }
+        .profile-actions a.secondary {
+            background: #23272a;
+            border: 1px solid #5865f2;
+            color: #5865f2;
+        }
+        .profile-assets {
+            margin-top: 24px;
+            background: #202225;
+            border-radius: 10px;
+            padding: 18px;
+            color: #e0e0e0;
+        }
+        .profile-assets h4 {
+            color: #fff;
+            margin-bottom: 12px;
+        }
+    </style>
 </head>
 <body>
     {% include 'usuarios/header.html'%}
     {% include 'usuarios/links.html'%}
     <div class="profile-card">
         <div class="profile-avatar">
-            <img src="{% static 'receitas/img/logo.png' %}" alt="Avatar" class="logo-image">
+            {% if usuario.foto_de_perfil %}
+                <img src="{{ usuario.foto_de_perfil.url }}" alt="Avatar">
+            {% else %}
+                <img src="{% static 'receitas/img/logo.png' %}" alt="Avatar">
+            {% endif %}
         </div>
         <h2 class="profile-title">{{ usuario.username }}</h2>
         <p class="profile-email">{{ usuario.email }}</p>
         <div class="profile-actions">
-            <a href="{% url 'usuarios:atualizar_perfil' usuario.id %}" class="modern-btn">Atualizar Perfil</a>
-            <a href="{% url 'usuarios:deletar' usuario.id %}" class="modern-btn danger">Deletar Conta</a>
-            <a href="{% url 'usuarios:minhas_receitas' usuario.id %}" class="modern-btn secondary">Minhas Receitas</a>
+            <a href="{% url 'usuarios:atualizar_perfil' usuario.id %}">Atualizar Perfil</a>
+            <a href="{% url 'usuarios:deletar' usuario.id %}" class="danger">Deletar Conta</a>
+            <a href="{% url 'usuarios:sec-password-change' usuario.id %}" class="secondary">Trocar Senha</a>
+            <a href="{% url 'usuarios:ver_minhas_receitas' usuario.id %}" class="secondary">Minhas Receitas</a>
+            <a href="{% url 'receitas:criar_receita' %}" class="secondary">Criar Receita</a>
+        </div>
+        <div class="profile-assets">
+            <h4>Outros dados</h4>
+            <p><strong>Nome completo:</strong> {{ usuario.username }}</p>
+            <p><strong>Data de cadastro:</strong> {{ usuario.date_joined|date:'d/m/Y' }}</p>
+            <p><strong>Último login:</strong> {{ usuario.last_login|date:'d/m/Y H:i' }}</p>
+            <p><strong>Receitas criadas:</strong> {{ usuario.receita_set.count }}</p>
         </div>
     </div>
 </body>
 </html>
+
+<!--TODO:falta colocar a opcao de troca de senha!!!!-->
