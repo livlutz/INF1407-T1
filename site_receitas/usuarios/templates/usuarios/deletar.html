@@ -13,14 +13,13 @@
     <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
     <div class="login-container">
         <h2>{{titulo_janela}}</h2>
-        <p>{{subtitulo_janela}}</p>
         {% block content %}
         <form method="post">
             {% csrf_token %}
             <table class="formulario">
                 {{ form.as_table }}
             </table>
-            <button type="submit" class="btn btn-primary">{{botao_texto}}</button>
+            <button type="submit" class="btn btn-primary">{{botao}}</button>
         </form>
         {% endblock %}
     </div>

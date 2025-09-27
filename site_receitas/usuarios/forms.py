@@ -18,7 +18,7 @@ class UsuarioLoginForm(forms.Form):
                 user = Usuario.objects.get(email=email)
             except Usuario.DoesNotExist:
                 raise forms.ValidationError("Email ou senha inválidos")
-            
+
             user = authenticate(username=user.username, password=password)
             if not user:
                 raise forms.ValidationError("Email ou senha inválidos")
@@ -34,4 +34,21 @@ class CustomUserCreationForm(UserCreationForm):
             'email': "Usado para recuperação de senha e notificações.",
             'password1': "Sua senha deve ter pelo menos 8 caracteres e não pode ser muito comum.",
             'password2': "Digite a mesma senha para verificação.",
+        }
+
+class UsuarioModel2Form(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['username', 'email', 'first_name', 'last_name']
+        labels = {
+            'username': 'Nome de usuário',
+            'email': 'Email',
+            'first_name': 'Primeiro nome',
+            'last_name': 'Sobrenome',
+        }
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
         }

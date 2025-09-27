@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm
+from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm, UsuarioModel2Form
 from usuarios.models import Usuario
 from receitas.models import Receita
 from django.contrib.auth import login as auth_login
@@ -74,51 +74,62 @@ class UsuarioReadView(View):
 
 #atualiza o usuario
 class UsuarioUpdateView(View):
-    def get(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
-        formulario = CustomUserCreationForm(instance=usuario)
-        contexto = {'formulario': formulario,
-                    'titulo_janela' : 'Atualizar conta',
-                    'titulo_pagina': 'Atualizar Perfil do Usuário',
-                    'botao' : 'Atualizar meu perfil',}
-        return render(request, "usuarios/perfil.html", contexto)
-
-    def post(self, request, *args, **kwargs):
+    def get(self, request, id, *args, **kwargs):
         usuario = get_object_or_404(Usuario, pk=id)
-        formulario = CustomUserCreationForm(request.POST, instance=usuario)
+        formulario = UsuarioModel2Form(instance=usuario)
+        contexto = {
+            'formulario': formulario,
+            'usuario': usuario,
+            'titulo_janela': 'Atualizar Perfil',
+            'titulo_pagina': 'Atualizar Dados do Usuário',
+            'botao': 'Atualizar Perfil',
+        }
+        return render(request, 'usuarios/atualiza.html', contexto)
+
+    def post(self, request, id, *args, **kwargs):
+        usuario = get_object_or_404(Usuario, pk=id)
+        formulario = UsuarioModel2Form(request.POST, instance=usuario)
         if formulario.is_valid():
-            usuario = formulario.save()
-            usuario.save()
-            return HttpResponseRedirect(reverse_lazy("usuarios: perfil"))
+            formulario.save()
+            return HttpResponseRedirect(reverse_lazy('usuario:perfil', kwargs={'id': id}))
         else:
-            contexto = {'formulario': formulario, 'mensagem': 'Erro ao atualizar o perfil!'}
-            return render(request, "usuarios/perfil.html", contexto)
+            contexto = {
+                'formulario': formulario,
+                'usuario': usuario,
+                'titulo_janela': 'Atualizar Perfil',
+                'titulo_pagina': 'Atualizar Dados do Usuário',
+                'botao': 'Atualizar Perfil',
+            }
+            return render(request, 'usuarios/atualiza.html', contexto)
 
 #deleta o usuario
 class UsuarioDeleteView(View):
-    def get(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
-        contexto = {'usuario': usuario,
-                    'titulo_janela' : 'Deletar conta',
-                    'titulo_pagina': 'Deletar Perfil do Usuário',
-                    'botao' : 'Deletar minha conta',}
+    def get(self, request, id, *args, **kwargs):
+        usuario = get_object_or_404(Usuario, pk=id)
+        contexto = {
+            'usuario': usuario,
+            'titulo_janela': 'Deletar conta',
+            'titulo_pagina': 'Deletar Perfil do Usuário',
+            'botao': 'Deletar minha conta',
+        }
         return render(request, "usuarios/deletar.html", contexto)
 
-    def post(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
+    def post(self, request, id, *args, **kwargs):
+        usuario = get_object_or_404(Usuario, pk=id)
         usuario.delete()
-        return HttpResponseRedirect(reverse_lazy("usuarios: login"))
+        return HttpResponseRedirect(reverse_lazy("usuario:login"))
 
-#lista as receitas do usuario
 class ReceitaListView(View):
-    def get(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
+    def get(self, request, id, *args, **kwargs):
+        usuario = get_object_or_404(Usuario, pk=id)
         receitas = Receita.objects.filter(autor=usuario)
-        contexto = {'usuario': usuario,
-                    'receitas': receitas,
-                    'titulo_janela' : 'Minhas Receitas',
-                    'titulo_pagina': 'Receitas do Usuário',}
-        return render(request, "usuarios/perfil.html", contexto)
+        contexto = {
+            'usuario': usuario,
+            'receitas': receitas,
+            'titulo_janela': 'Minhas Receitas',
+            'titulo_pagina': 'Receitas do Usuário',
+        }
+        return render(request, "usuarios/minhas_receitas.html", contexto)
 
 
 #usuario1 - s12345678@ - u@gmail.com
