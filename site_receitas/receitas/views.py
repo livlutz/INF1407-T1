@@ -9,11 +9,12 @@ from django.http.response import HttpResponseRedirect
 
 # Create your views here.
 
-"""View que cria uma nova receita"""
 class ReceitasCreateView(View):
+    """View que cria uma nova receita"""
 
-    """ Renderiza o formulario para criar uma nova receita"""
     def get(self, request, *args, **kwargs):
+        """ Renderiza o formulario para criar uma nova receita"""
+
         contexto = {'formulario': ReceitaModel2Form,
                     'titulo_pagina': 'Criar Receita',
                     'titulo_janela': 'Criar Nova Receita',
@@ -21,8 +22,9 @@ class ReceitasCreateView(View):
         return render(request, 'receitas/criarReceita.html', contexto)
 
 
-    """ Processa o formulario para criar uma nova receita"""
     def post(self, request, *args, **kwargs):
+        """ Processa o formulario para criar uma nova receita"""
+
         formulario = ReceitaModel2Form(request.POST, request.FILES)
         if formulario.is_valid():
             receita = formulario.save(commit=False)
@@ -33,10 +35,12 @@ class ReceitasCreateView(View):
             contexto = {'formulario': formulario,'mensagem': 'Erro ao criar receita!'}
             return render(request, 'receitas/criarReceita.html', contexto)
 
-"""View que lista as receitas públicas"""
 class PubReceitasListView(View):
-    """ Renderiza a lista de receitas públicas"""
+    """View que lista as receitas públicas"""
+
     def get(self, request, *args, **kwargs):
+        """ Renderiza a lista de receitas públicas"""
+
         receitas = Receita.objects.filter(visibilidade='pub') #TODO: filtro ta com problema
         contexto = {
             'pub_receitas': receitas,
@@ -45,10 +49,12 @@ class PubReceitasListView(View):
         }
         return render(request, 'receitas/home.html', contexto)
 
-"""View que atualiza uma receita"""
 class ReceitasUpdateView(View):
-    """ Renderiza o formulario para atualizar a receita"""
+    """View que atualiza uma receita"""
+
     def get(self, request, id, *args, **kwargs):
+        """ Renderiza o formulario para atualizar a receita"""
+
         receita = get_object_or_404(Receita, id=id)
         formulario = ReceitaModel2Form(instance=receita)
         contexto = {'formulario': formulario,
@@ -57,38 +63,47 @@ class ReceitasUpdateView(View):
                     'botao': 'Salvar', }
         return render(request, 'receitas/atualizaReceita.html', contexto)
 
-    """ Processa o formulario para atualizar a receita"""
     def post(self, request, id, *args, **kwargs):
+        """ Processa o formulario para atualizar a receita"""
+
         receita = get_object_or_404(Receita, id=id)
-        formulario = ReceitaModel2Form(request.POST, request.FILES, instance=receita)  # Fixed: Added request.FILES
+        formulario = ReceitaModel2Form(request.POST, request.FILES, instance=receita)
+
         if formulario.is_valid():
             receita = formulario.save()
             return HttpResponseRedirect(reverse_lazy("receitas:homepage"))
+
         else:
             contexto = {'formulario': formulario,'mensagem': 'Erro ao editar receita!'}
             return render(request, 'receitas/atualizaReceita.html', contexto)
 
-"""View que deleta uma receita"""
 class ReceitasDeleteView(View):
-    """ Renderiza a confirmação para deletar a receita"""
+    """View que deleta uma receita"""
+
     def get(self, request, id, *args, **kwargs):
+        """ Renderiza a confirmação para deletar a receita"""
+
         receita = get_object_or_404(Receita, id=id)
         contexto = {'receita': receita,
                     'titulo_pagina': 'Deletar',
                     'titulo_janela': 'Deletar Receita',
                     'botao': 'Deletar', }
+
         return render(request, 'receitas/deletaReceita.html', contexto)
 
-    """ Processa a confirmação para deletar a receita"""
     def post(self, request, id, *args, **kwargs):
+        """ Processa a confirmação para deletar a receita"""
+
         receita = get_object_or_404(Receita, id=id)
         receita.delete()
         return HttpResponseRedirect(reverse_lazy("receitas:homepage"))
 
-"""View que exibe os detalhes de uma receita"""
 class VerReceita(View):
-    """ Renderiza os detalhes da receita"""
+    """View que exibe os detalhes de uma receita"""
+
     def get(self, request,id, *args, **kwargs):
+        """ Renderiza os detalhes da receita"""
+        
         receita = get_object_or_404(Receita, id=id)
         contexto = { 'receita': receita,
                     'titulo_pagina': 'Ver receita',
