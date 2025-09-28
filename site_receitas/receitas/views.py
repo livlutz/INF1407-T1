@@ -42,7 +42,7 @@ class PubReceitasListView(View):
     def get(self, request, *args, **kwargs):
         """ Renderiza a lista de receitas públicas"""
 
-        receitas = Receita.objects.filter(visibilidade='pub') #TODO: filtro ta com problema
+        receitas = Receita.objects.filter(visibilidade='pub')
         contexto = {
             'pub_receitas': receitas,
             'titulo_janela': 'Receitas Públicas',
@@ -71,7 +71,7 @@ class ReceitasUpdateView(View):
         formulario = ReceitaModel2Form(request.POST, request.FILES, instance=receita)
 
         if formulario.is_valid():
-            receita = formulario.save()
+            formulario.save()
             return HttpResponseRedirect(reverse_lazy("receitas:homepage"))
 
         else:

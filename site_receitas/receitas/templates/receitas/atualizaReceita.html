@@ -13,9 +13,8 @@
     <div class="criar-receita-container">
         <div class="criar-receita-card">
             <h1 class="criar-receita-title">{{titulo_janela}}</h1>
-            <form action="" method="POST" class="criar-receita-form">
+            <form action="" method="POST" class="criar-receita-form" enctype="multipart/form-data">
                 <fieldset>
-                    <legend class="criar-receita-legend">Formulário de atualizar receita</legend>
                     {% csrf_token %}
                     <table class="formulario">
                         {{ formulario.as_table }}
