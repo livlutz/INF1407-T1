@@ -22,4 +22,4 @@ urlpatterns = [
     path('password_change_form/<int:id>/', views.MyPasswordChangeView.as_view(), name='sec-password-change'), #rota de mudança de senha
     path('password_change_done', views.MyPasswordChangeDoneView.as_view(), name='sec-password-change-done'), #rota de mudança de senha concluída
     path('perfil/ver_receitas/<int:id>/', views.ReceitaListView.as_view(), name='ver_minhas_receitas'), #rota de ver receitas do usuario
-]
+    ]

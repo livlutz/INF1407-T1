@@ -123,15 +123,33 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]  
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+#configuração de arquivos de mídia
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+#sobrescreve os redirects de login e logout do django
 LOGIN_URL = 'usuarios:login'
 LOGIN_REDIRECT_URL = 'receitas:homepage'
 LOGOUT_REDIRECT_URL = 'receitas:homepage'
+
+#configuração do email para redefinição de senha
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'
+
+# Configurações opcionais (não necessárias para console)
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_USE_TLS = False
+
+#password_reset_confirmsobrescreve a url do django para a de usuarios
+PASSWORD_RESET_CONFIRM_URL = 'usuarios:password_reset_confirm'
+PASSWORD_RESET_DONE_URL = 'usuarios:password_reset_done'
+PASSWORD_RESET_COMPLETE_URL = 'usuarios:password_reset_complete'
+
