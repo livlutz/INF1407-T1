@@ -10,7 +10,6 @@
     {% include 'receitas/header.html'%}
 </head>
 <body class="bg-dark text-light">
-    <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
     <div class="login-container">
         <h2>{{titulo_janela}}</h2>
         {% block content %}
@@ -19,7 +18,7 @@
             <table class="formulario">
                 {{ form.as_table }}
             </table>
-            <button type="submit" class="btn btn-primary">{{botao}}</button>
+            <button type="submit" class="btn modern-btn">{{botao}}</button>
         </form>
         {% endblock %}
     </div>

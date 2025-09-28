@@ -13,12 +13,11 @@
     {% include 'usuarios/links.html'%}
     <div class="login-card">
         <div class="login-logo">
-            <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
+            <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
         </div>
         <h1 class="login-title">{{titulo_janela}}</h1>
         <form action="" method="post" class="login-form">
             <fieldset>
-                <legend class="login-legend">Formulário de Login</legend>
                 {% csrf_token %}
                 <table class="formulario">
                 {{ formulario.as_table }}

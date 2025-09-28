@@ -95,9 +95,7 @@
         </div>
         <div class="profile-assets">
             <h4>Outros dados</h4>
-            <p><strong>Nome completo:</strong> {{ usuario.username }}</p>
             <p><strong>Data de cadastro:</strong> {{ usuario.date_joined|date:'d/m/Y' }}</p>
-            <p><strong>Último login:</strong> {{ usuario.last_login|date:'d/m/Y H:i' }}</p>
             <p><strong>Receitas criadas:</strong> {{ usuario.receita_set.count }}</p>
         </div>
     </div>

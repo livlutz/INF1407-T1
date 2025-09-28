@@ -123,6 +123,14 @@
   transform: translateY(-2px) scale(1.04);
 }
 
+.user-name {
+  color: #ffe0b2;
+  font-weight: 600;
+  align-self: center;
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
 
 /* cadastro page styles */
 .cadastro-container {

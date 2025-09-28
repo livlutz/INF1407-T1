@@ -9,7 +9,7 @@ class Usuario(AbstractUser):
     """
     id = models.AutoField(primary_key=True)
     email = models.EmailField(help_text='Digite seu email', unique=True)
-    foto_de_perfil = models.ImageField(upload_to='site_receitas/usuarios/static/img/usuarios', null=True, blank=True)
+    foto_de_perfil = models.ImageField(upload_to='usuarios/img', null=True, blank=True)
 
     class Meta:
         app_label = 'usuarios'

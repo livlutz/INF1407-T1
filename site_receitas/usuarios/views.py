@@ -99,7 +99,7 @@ class UsuarioUpdateView(View):
     def post(self, request, id, *args, **kwargs):
         """realiza a atualização do usuario a partir do formulario"""
         usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
-        formulario = UsuarioUpdateForm(request.POST, instance=usuario)
+        formulario = UsuarioUpdateForm(request.POST, request.FILES, instance=usuario)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect(reverse_lazy('usuarios:perfil', kwargs={'id': id}))
