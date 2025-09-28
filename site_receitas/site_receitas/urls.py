@@ -27,8 +27,4 @@ urlpatterns = [
     path('', include('receitas.urls', namespace='receitas')),
     # Links para as URLs de usuários
     path('', include('usuarios.urls', namespace='usuarios')),
-    # Link para a página inicial de segurança
-    path('seguranca/', views.homeSec, name='homeSec'),
-    # Link para a página de registro
-    path('seguranca/registro/', views.registro, name='sec-registro'),
 ]

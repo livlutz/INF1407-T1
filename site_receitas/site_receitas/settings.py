@@ -103,12 +103,15 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = "usuarios.Usuario"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
+#configura o idioma para portugues do brasil
 LANGUAGE_CODE = "pt-BR"
 
+#configura o fuso horario para sao paulo
 TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
@@ -125,3 +128,6 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

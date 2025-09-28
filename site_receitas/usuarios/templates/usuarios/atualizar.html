@@ -26,12 +26,9 @@
                     {% if mensagem %}
                         <p class="cadastro-msg">{{ mensagem }}</p>
                     {% endif %}
-                    <button type="submit" class="modern-btn">Cadastrar</button>
+                    <button type="submit" class="modern-btn">{{botao}}</button>
                 </fieldset>
             </form>
-            <div class="login-link">
-                Já tem uma conta? <a href="{% url 'usuarios:login' %}">Login</a>
-            </div>
         </div>
     </div>
 </body>

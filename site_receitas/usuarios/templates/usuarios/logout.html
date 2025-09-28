@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmar Logout</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-light">
+    {% include 'usuarios/header.html' %}
+    <div class="container mt-5">
+        <h2>Confirmar Logout</h2>
+        <p>Você tem certeza que deseja sair?</p>
+        <form method="post" action="{% url 'usuarios:logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Sim, sair</button>
+            <a href="{% url 'receitas:homepage' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+</html>

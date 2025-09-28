@@ -10,23 +10,7 @@
     </head>
     <body class="bg-dark text-light">
         {% include 'receitas/header.html' %}
-        <div class="logo-container">
-            <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
-        </div>
-        <!-- Header -->
-    <header class="bg-dark shadow-sm p-4 md:px-8">
-        <div class="header-flex">
-            <div class="header-left">
-                <div class="logo-container">
-                    <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
-                </div>
-                <nav class="nav-links">
-                    <a href="{% url 'usuarios:login' %}" class="modern-btn">Login</a>
-                    <a href="{% url 'usuarios:cadastro' %}" class="modern-btn">Cadastro</a>
-                </nav>
-            </div>
-        </div>
-    </header>
+
         <!-- Hero Section -->
     <section class="hero-section py-20 px-4 text-center relative overflow-hidden">
             <div class="container mx-auto relative z-10">
@@ -41,12 +25,24 @@
         </section>
         <main class="container mx-auto p-4 md:p-8">
             <!--TODO: Aqui vai mostrar todas as receitas?? e se forem muitas??-->
+            <!-- botao para criar receita -->
+            {% if user.is_authenticated %}
+                <div class="text-center mb-8">
+                    <a href="{% url 'receitas:criar_receita' %}" class="btn-orange font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">Criar Nova Receita</a>
+                </div>
+            {% endif %}
             <section class="my-12">
                 <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Receitas em Destaque</h2>
                 <div class="receitas-scroll">
                     {% for receita in pub_receitas %}
                         <div class="bg-dark rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200 recipe-card">
-                            <img src="{{ receita.foto_da_receita }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover">
+                            {% if receita.foto_da_receita and receita.foto_da_receita.name %}
+                                <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover">
+                            {% else %}
+                                <div class="w-full h-48 bg-secondary d-flex align-items-center justify-content-center">
+                                    <span class="text-muted">Sem imagem</span>
+                                </div>
+                            {% endif %}
                             <div class="p-6">
                                 <h3 class="text-xl font-semibold mb-2">{{ receita.titulo }}</h3>
                                 <p class="text-secondary mb-4">{{ receita.categoria|truncatewords:20 }}</p>
@@ -59,12 +55,6 @@
                 </div>
             </section>
         </main>
-        <!-- Footer -->
-    <footer class="bg-dark text-light py-6 mt-12">
-            <div class="container mx-auto text-center">
-                <p>&copy; 2025 Receitinhas da vovó. Todos os direitos reservados.</p>
-            </div>
-        </footer>
     </body>
 </html>
 
