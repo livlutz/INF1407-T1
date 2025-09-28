@@ -102,7 +102,7 @@ class UsuarioUpdateView(View):
         formulario = UsuarioUpdateForm(request.POST, instance=usuario)
         if formulario.is_valid():
             formulario.save()
-            return HttpResponseRedirect(reverse_lazy('usuario:perfil', kwargs={'id': id}))
+            return HttpResponseRedirect(reverse_lazy('usuarios:perfil', kwargs={'id': id}))
         else:
             contexto = {
                 'formulario': formulario,
@@ -130,7 +130,7 @@ class UsuarioDeleteView(View):
         """realiza a deleção do usuario"""
         usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
         usuario.delete()
-        return HttpResponseRedirect(reverse_lazy("usuario:login"))
+        return HttpResponseRedirect(reverse_lazy("usuarios:login"))
 
 class ReceitaListView(View):
     """View de listar as receitas do usuario, que inclui receitas publicas e privadas"""
