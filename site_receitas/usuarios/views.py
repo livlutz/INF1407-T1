@@ -44,15 +44,6 @@ def login(request):
     }
     return render(request, 'usuarios/login.html', contexto)
 
-class Perfil(View):
-    def get(self, request, id, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=self.kwargs['id'])
-        contexto = {'usuario': usuario,
-                    'titulo_janela' : 'Perfil',
-                    'titulo_pagina': 'Perfil do Usuário',
-                    'botao' : 'Ver meu perfil',}
-        return render(request, "usuarios/perfil.html", contexto)    
-
 def deletar(request):
     return render(request, 'usuarios/deletar.html')
 
