@@ -11,11 +11,7 @@
     <link rel="stylesheet" href="{% static 'usuarios/css/style.css' %}">
 </head>
 <body class="bg-dark text-light">
-    {% include 'usuarios/header.html'%}
-    {% include 'usuarios/links.html'%}
-    <div class="logo-fixed">
-        <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
-    </div>
+    {% include 'receitas/header.html'%}
     <div class="container mt-5">
         <h2>Editar Perfil</h2>
         <form method="post" enctype="multipart/form-data">
@@ -24,7 +20,7 @@
             {% if mensagem %}
                 <div class="alert alert-info">{{ mensagem }}</div>
             {% endif %}
-            <button type="submit" class="btn btn-primary">Atualizar</button>
+            <button type="submit" class="btn modern-btn">Atualizar</button>
         </form>
     </div>
 </body>

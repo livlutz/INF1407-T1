@@ -9,8 +9,8 @@ em uma página HTML use:
     <a href="{% url 'usuarios:logout_confirm' %}" class="modern-btn">Logout</a>
     <a href="{% url 'usuarios:perfil' user.id %}" class="modern-btn">Perfil</a>
     <div class="author-avatar" style="align-self: center;">
-        {% if receita.autor.foto_de_perfil %}
-            <img src="{{ receita.autor.foto_de_perfil.url }}" alt="{{ receita.autor.username }}" class="author-profile-pic">
+        {% if user.foto_de_perfil %}
+            <img src="{{ user.foto_de_perfil.url }}" alt="{{ user.username }}" class="author-profile-pic">
         {% else %}
             <div class="author-profile-pic author-default-pic">
                 {{ user.username|first|upper }}
@@ -21,10 +21,9 @@ em uma página HTML use:
     <a href="{% url 'usuarios:login' %}" class="modern-btn">Login</a>
     <a href="{% url 'usuarios:cadastro' %}" class="modern-btn">Cadastro</a>   
   {% endif %}
-  <!-- Aparecer nome do usuário na tela -->
-    <div class="user-name">
-      {% firstof user.username "Visitante" %}
-    </div>
+  <div class="user-name">
+    {% firstof user.username "Visitante" %}
+  </div>
 
   <!-- <a href="{ url 'perfil' pk=usuario.id %}" class="modern-btn">Perfil</a> -->
 </nav>
