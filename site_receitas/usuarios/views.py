@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
@@ -8,11 +9,26 @@ from receitas.models import Receita
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 
-
 # Create your views here.
 
-"""Função de realizar login"""
+@login_required
+def logout_confirm(request):
+    """Função de confirmar logout"""
+    return render(request, 'usuarios/logout.html')
+
+@login_required
+def perfil(request, id):
+    """Função de mostrar o perfil do usuario logado"""
+    usuario = get_object_or_404(Usuario, pk=id)
+    contexto = {
+        'usuario': usuario,
+        'titulo_janela': 'Perfil',
+        'titulo_pagina': 'Perfil do Usuário',
+    }
+    return render(request, 'usuarios/perfil.html', contexto)
+
 def login(request):
+    """Função de realizar login"""
     if request.method == 'POST':
         formulario = UsuarioLoginForm(request.POST)
         if formulario.is_valid():
@@ -28,35 +44,18 @@ def login(request):
     }
     return render(request, 'usuarios/login.html', contexto)
 
-"""Função de confirmar logout"""
-@login_required
-def logout_confirm(request):
-    return render(request, 'usuarios/logout.html')
-
-"""Função de mostrar o perfil do usuario logado"""
-@login_required
-def perfil(request, id):
-    usuario = get_object_or_404(Usuario, pk=id)
-    contexto = {
-        'usuario': usuario,
-        'titulo_janela': 'Perfil',
-        'titulo_pagina': 'Perfil do Usuário',
-    }
-    return render(request, 'usuarios/perfil.html', contexto)
-
-"""View de criar usuario"""
 class UsuarioCreateView(View):
-    """função de criar usuario"""
+    """View de criar usuario"""
     def get(self, request, *args, **kwargs):
+        """função de criar usuario"""
         contexto = { 'formulario': CustomUserCreationForm,
                      'titulo_janela' : 'Cadastro',
                     'titulo_pagina': 'Cadastrar Usuário',
                     'botao' : 'Cadastrar',}
-
         return render(request, "usuarios/cadastro.html", contexto)
 
-    """função de postar o formulario de criação de usuario"""
     def post(self, request, *args, **kwargs):
+        """função de postar o formulario de criação de usuario"""
         formulario = CustomUserCreationForm(request.POST)
         if formulario.is_valid():
             usuario = formulario.save()
@@ -66,11 +65,11 @@ class UsuarioCreateView(View):
             contexto = {'formulario': formulario, 'mensagem': 'Erro ao completar o cadastro!'}
             return render(request, "usuarios/cadastro.html", contexto)
 
-"""View de ler/ mostrar usuario usada para mostrar o perfil do usuario"""
 class UsuarioReadView(View):
-    """mostra o perfil do usuario"""
+    """View de ler/ mostrar usuario usada para mostrar o perfil do usuario"""
     def get(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
+        """mostra o perfil do usuario"""
+        usuario = Usuario.objects.get(pk=kwargs.get('id'))
         contexto = {'usuario': usuario,
                     'formulario': CustomUserCreationForm(instance=usuario),
                     'titulo_janela' : 'Perfil',
@@ -78,10 +77,10 @@ class UsuarioReadView(View):
                     'botao' : 'Ver meu perfil',}
         return render(request, "usuarios/perfil.html", contexto)
 
-"""View de atualizar usuario"""
 class UsuarioUpdateView(View):
-    """mostra o formulario de atualizar usuario"""
+    """View de atualizar usuario"""
     def get(self, request, id, *args, **kwargs):
+        """mostra o formulario de atualizar usuario"""
         usuario = get_object_or_404(Usuario, pk=id)
         formulario = UsuarioModel2Form(instance=usuario)
         contexto = {
@@ -93,8 +92,8 @@ class UsuarioUpdateView(View):
         }
         return render(request, 'usuarios/atualiza.html', contexto)
 
-    """realiza a atualização do usuario a partir do formulario"""
     def post(self, request, id, *args, **kwargs):
+        """realiza a atualização do usuario a partir do formulario"""
         usuario = get_object_or_404(Usuario, pk=id)
         formulario = UsuarioModel2Form(request.POST, instance=usuario)
         if formulario.is_valid():
@@ -110,10 +109,10 @@ class UsuarioUpdateView(View):
             }
             return render(request, 'usuarios/atualiza.html', contexto)
 
-"""View de deletar usuario"""
 class UsuarioDeleteView(View):
-    """mostra a confirmação de deletar usuario"""
+    """View de deletar usuario"""
     def get(self, request, id, *args, **kwargs):
+        """mostra a confirmação de deletar usuario"""
         usuario = get_object_or_404(Usuario, pk=id)
         contexto = {
             'usuario': usuario,
@@ -123,16 +122,16 @@ class UsuarioDeleteView(View):
         }
         return render(request, "usuarios/deletar.html", contexto)
 
-    """realiza a deleção do usuario"""
     def post(self, request, id, *args, **kwargs):
+        """realiza a deleção do usuario"""
         usuario = get_object_or_404(Usuario, pk=id)
         usuario.delete()
         return HttpResponseRedirect(reverse_lazy("usuario:login"))
 
-"""View de listar as receitas do usuario, que inclui receitas publicas e privadas"""
 class ReceitaListView(View):
-    """mostra as receitas do usuario"""
+    """View de listar as receitas do usuario, que inclui receitas publicas e privadas"""
     def get(self, request, id, *args, **kwargs):
+        """mostra as receitas do usuario"""
         usuario = get_object_or_404(Usuario, pk=id)
         receitas = Receita.objects.filter(autor=usuario)
         contexto = {
@@ -142,6 +141,3 @@ class ReceitaListView(View):
             'titulo_pagina': 'Receitas do Usuário',
         }
         return render(request, "usuarios/ver_minhas_receitas.html", contexto)
-
-
-#usuario1 - s12345678@ - u@gmail.com
