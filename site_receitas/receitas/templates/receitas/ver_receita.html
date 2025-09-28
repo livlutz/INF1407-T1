@@ -10,52 +10,75 @@
 </head>
 <body class="bg-dark text-light">
     {% include 'receitas/header.html' %}
-    <div class="ver-receita-container">
-        <div class="ver-receita-card">
-            <div class="ver-receita-img-wrap">
-                {% if receita.foto_da_receita %}
-                    <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover" style="max-height: 300px">
-                {% else %}
-                    <img src="{% static 'receitas/img/logo.png' %}" alt="Imagem padrão" class="w-full h-48 object-cover" style="max-height: 300px">
-                {% endif %}
-            </div>
-            <div class="ver-receita-content">
-                <h1 class="ver-receita-title">{{ receita.titulo }}</h1>
-                <div class="ver-receita-meta">
-                    <span class="ver-receita-cat">categoria {{ receita.categoria }}</span>
-                    <span class="ver-receita-time">⏱️ {{ receita.tempo_de_preparo }} minutos</span>
-                    <span class="ver-receita-porc">🍽️ {{ receita.porcoes }} porções</span>
-                    <span class="ver-receita-author">👤autor {{ receita.autor.username }}</span>
-                </div>
 
-                <!-- Author-only action buttons -->
-                {% if user.is_authenticated and user == receita.autor %}
-                    <div class="recipe-actions mt-3 mb-4">
-                        <a href="{% url 'receitas:editar_receita' receita.id %}" class="btn btn-warning mr-2">
-                            <i class="fas fa-edit"></i> Editar Receita
-                        </a>
-                        <a href="{% url 'receitas:deletar_receita' receita.id %}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar esta receita?')">
-                            <i class="fas fa-trash"></i> Deletar Receita
+    <main class="container py-5 mt-4">
+        <section class="recipe-detail-section">
+            <div class="recipe-detail-card">
+                <div class="recipe-detail-image-container">
+                    {% if receita.foto_da_receita %}
+                        <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="recipe-detail-image">
+                    {% else %}
+                        <div class="recipe-detail-no-image">
+                            <span>Sem imagem</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="recipe-detail-content">
+                    <h1 class="recipe-detail-title">{{ receita.titulo }}</h1>
+                    <div class="recipe-detail-meta">
+                        <div class="recipe-detail-author">
+                            <div class="author-avatar">
+                                {% if receita.autor.foto_de_perfil %}
+                                    <img src="{{ receita.autor.foto_de_perfil.url }}" alt="{{ receita.autor.username }}" class="author-profile-pic">
+                                {% else %}
+                                    <div class="author-profile-pic author-default-pic">
+                                        {{ receita.autor.username|first|upper }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <span class="author-name">Por {{ receita.autor.username }}</span>
+                        </div>
+                        <div class="recipe-detail-info">
+                            <span class="recipe-info-item">📂 {{ receita.categoria }}</span>
+                            <span class="recipe-info-item">⏱️ {{ receita.tempo_de_preparo }} min</span>
+                            <span class="recipe-info-item">🍽️ {{ receita.porcoes }} porções</span>
+                        </div>
+                    </div>
+
+                    <!-- Author-only action buttons -->
+                    {% if user.is_authenticated and user == receita.autor %}
+                        <div class="recipe-actions mb-4">
+                            <a href="{% url 'receitas:editar_receita' receita.id %}" class="btn-tg-orange mr-2">
+                                Editar Receita
+                            </a>
+                            <a href="{% url 'receitas:deletar_receita' receita.id %}" class="btn-danger" onclick="return confirm('Tem certeza que deseja deletar esta receita?')">
+                                Deletar Receita
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <div class="recipe-detail-section">
+                        <h2 class="recipe-section-title">Ingredientes</h2>
+                        <ul class="recipe-ingredients-list">
+                            {% for ingrediente in receita.ingredientes.splitlines %}
+                                <li>{{ ingrediente }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="recipe-detail-section">
+                        <h2 class="recipe-section-title">Modo de Preparo</h2>
+                        <div class="recipe-instructions">{{ receita.modo_de_preparo|linebreaks }}</div>
+                    </div>
+
+                    <div class="recipe-actions mt-4">
+                        <a href="{% url 'receitas:homepage' %}" class="btn-tg-orange">
+                            ← Voltar às Receitas
                         </a>
                     </div>
-                {% endif %}
-
-                <h2 class="ver-receita-section">Ingredientes</h2>
-                <ul class="ver-receita-list">
-                    {% for ingrediente in receita.ingredientes.splitlines %}
-                        <li>{{ ingrediente }}</li>
-                    {% endfor %}
-                </ul>
-                <h2 class="ver-receita-section">Modo de Preparo</h2>
-                <p class="ver-receita-prep">{{ receita.modo_de_preparo }}</p>
-
-                <div class="mt-4">
-                    <a href="{% url 'receitas:homepage' %}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Voltar às Receitas
-                    </a>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 </body>
 </html>

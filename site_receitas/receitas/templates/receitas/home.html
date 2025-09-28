@@ -11,46 +11,51 @@
     <body class="bg-dark text-light">
         {% include 'receitas/header.html' %}
 
-        <!-- Hero Section -->
-    <section class="hero-section py-20 px-4 text-center relative overflow-hidden">
-            <div class="container mx-auto relative z-10">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Explore as receitas disponíveis</h1>
-                <p class="text-lg md:text-xl mb-8 opacity-90">Procure pela sua favorita!</p>
-            </div>
-            <!-- Background decorative shapes -->
-            <div class="absolute inset-0 z-0 opacity-20">
-                <div class="w-48 h-48 bg-orange-600 rounded-full absolute -top-10 -left-10 transform rotate-45"></div>
-                <div class="w-64 h-64 bg-yellow-300 rounded-full absolute -bottom-20 -right-20 transform -rotate-12"></div>
-            </div>
-        </section>
-        <main class="container mx-auto p-4 md:p-8">
-            <!--TODO: Aqui vai mostrar todas as receitas?? e se forem muitas??-->
-            <!-- botao para criar receita -->
+        <main class="container py-5 mt-4">
             {% if user.is_authenticated %}
-                <div class="text-center mb-8">
-                    <a href="{% url 'receitas:criar_receita' %}" class="btn-orange font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">Criar Nova Receita</a>
+                <div class="text-center mb-4">
+                    <a href="{% url 'receitas:criar_receita' %}" class="btn-tg-orange">Criar Nova Receita</a>
                 </div>
             {% endif %}
-            <section class="my-12">
-                <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Receitas em Destaque</h2>
-                <div class="receitas-scroll">
+
+            <section class="recipes-section">
+                <h2 class="section-title text-center mb-4">Confira nossas receitas</h2>
+                <div class="recipes-grid">
                     {% for receita in pub_receitas %}
-                        <div class="bg-dark rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200 recipe-card">
-                            {% if receita.foto_da_receita and receita.foto_da_receita.name %}
-                                <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover">
-                            {% else %}
-                                <div class="w-full h-48 bg-secondary d-flex align-items-center justify-content-center">
-                                    <span class="text-muted">Sem imagem</span>
+                        <div class="recipe-card-tg">
+                            <div class="recipe-image-container">
+                                {% if receita.foto_da_receita and receita.foto_da_receita.name %}
+                                    <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="recipe-image">
+                                {% else %}
+                                    <div class="recipe-image recipe-no-image">
+                                        <span>Sem imagem</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="recipe-content">
+                                <h3 class="recipe-title">
+                                    <a href="{% url 'receitas:ver_receita' receita.id %}">{{ receita.titulo }}</a>
+                                </h3>
+                                <div class="recipe-meta">
+                                    <div class="recipe-author">
+                                        <div class="author-avatar">
+                                            {% if receita.autor.foto_de_perfil %}
+                                                <img src="{{ receita.autor.foto_de_perfil.url }}" alt="{{ receita.autor.username }}" class="author-profile-pic">
+                                            {% else %}
+                                                <div class="author-profile-pic author-default-pic">
+                                                    {{ receita.autor.username|first|upper }}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <span class="author-name">Por {{ receita.autor.username|default:"TudoGostoso" }}</span>
+                                    </div>
                                 </div>
-                            {% endif %}
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-2">{{ receita.titulo }}</h3>
-                                <p class="text-secondary mb-4">{{ receita.categoria|truncatewords:20 }}</p>
-                                <a href="{% url 'receitas:ver_receita' receita.id %}" class="btn-orange font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">Ver Receita</a>
                             </div>
                         </div>
                     {% empty %}
-                        <p class="text-center text-secondary">Nenhuma receita disponível no momento.</p>
+                        <div class="w-100">
+                            <p class="text-center py-5" style="color: #adb5bd;">Nenhuma receita disponível no momento.</p>
+                        </div>
                     {% endfor %}
                 </div>
             </section>
