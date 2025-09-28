@@ -17,18 +17,18 @@ class ReceitasCreateView(View):
                     'titulo_pagina': 'Criar Receita',
                     'titulo_janela': 'Criar Nova Receita',
                     'botao': 'Criar Receita', }
-        return render(request, 'receitas/criar-receita.html', contexto)
+        return render(request, 'receitas/criarReceita.html', contexto)
 
     def post(self, request, *args, **kwargs):
         formulario = ReceitaModel2Form(request.POST)
         if formulario.is_valid():
-            receita = formulario.save()
+            receita = formulario.save(commit=False)
             receita.autor = request.user
             receita.save()
             return HttpResponseRedirect(reverse_lazy("receitas:homepage"))
         else:
             contexto = {'formulario': formulario,'mensagem': 'Erro ao criar receita!'}
-            return render(request, 'receitas/criar-receita.html', contexto)
+            return render(request, 'receitas/criarReceita.html', contexto)
 
 
 class PubReceitasListView(View):
@@ -81,7 +81,7 @@ class ReceitasDeleteView(View):
 
 class VerReceita(View):
     def get(self, request, *args, **kwargs):
-        receita = Receita.objects.get()
+        receita = Receita.objects.get(pk=self.kwargs['id'])
         contexto = { 'receita': receita,
                     'titulo_pagina': 'Ver receita',
                     'titulo_janela': 'Vendo receita',

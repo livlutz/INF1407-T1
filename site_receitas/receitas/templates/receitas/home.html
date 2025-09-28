@@ -25,12 +25,22 @@
         </section>
         <main class="container mx-auto p-4 md:p-8">
             <!--TODO: Aqui vai mostrar todas as receitas?? e se forem muitas??-->
+            <!-- botao para criar receita -->
+            {% if user.is_authenticated %}
+                <div class="text-center mb-8">
+                    <a href="{% url 'receitas:criar_receita' %}" class="btn-orange font-semibold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">Criar Nova Receita</a>
+                </div>
+            {% endif %}
             <section class="my-12">
                 <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Receitas em Destaque</h2>
                 <div class="receitas-scroll">
                     {% for receita in pub_receitas %}
                         <div class="bg-dark rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200 recipe-card">
-                            <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover">
+                            {% if receita.foto_da_receita %}
+                                <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover">
+                            {% else %}
+                                <img src="{% static 'receitas/img/logo.png' %}" alt="Imagem padrão" class="w-full h-48 object-cover">
+                            {% endif %}
                             <div class="p-6">
                                 <h3 class="text-xl font-semibold mb-2">{{ receita.titulo }}</h3>
                                 <p class="text-secondary mb-4">{{ receita.categoria|truncatewords:20 }}</p>

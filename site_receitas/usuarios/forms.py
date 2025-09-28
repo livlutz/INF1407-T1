@@ -35,3 +35,13 @@ class CustomUserCreationForm(UserCreationForm):
             'password1': "Sua senha deve ter pelo menos 8 caracteres e não pode ser muito comum.",
             'password2': "Digite a mesma senha para verificação.",
         }
+
+class UsuarioUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ("username", "email", "foto_de_perfil")
+        help_texts = {
+            'username': "Atualize seu nome de usuário (letras, números e @/./+/-/_).",
+            'email': "Atualize seu email para recuperação de senha e notificações.",
+            'foto_de_perfil': "Atualize sua foto de perfil.",
+        }

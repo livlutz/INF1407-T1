@@ -8,6 +8,7 @@ app_name = 'receitas'
 urlpatterns = [
     path('', views.PubReceitasListView.as_view(), name = 'homepage'),
     path('receita/<int:id>/', views.VerReceita.as_view(), name = 'ver_receita'),
+    path('criar_receita/', views.ReceitasCreateView.as_view(), name = 'criar_receita'),
 ]
 
 from django.conf import settings

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm
+from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm, UsuarioUpdateForm
 from usuarios.models import Usuario
 from receitas.models import Receita
 from django.contrib.auth import login as auth_login  
@@ -26,9 +26,14 @@ def login(request):
     }
     return render(request, 'usuarios/login.html', contexto)
 
-    
-def perfil(request):
-    return render(request, 'usuarios/perfil.html')
+class Perfil(View):
+    def get(self, request, id, *args, **kwargs):
+        usuario = Usuario.objects.get(pk=self.kwargs['id'])
+        contexto = {'usuario': usuario,
+                    'titulo_janela' : 'Perfil',
+                    'titulo_pagina': 'Perfil do Usuário',
+                    'botao' : 'Ver meu perfil',}
+        return render(request, "usuarios/perfil.html", contexto)    
 
 def deletar(request):
     return render(request, 'usuarios/deletar.html')
@@ -56,7 +61,7 @@ class UsuarioCreateView(View):
 #lista o perfil do usuario
 class UsuarioReadView(View):
     def get(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
+        usuario = Usuario.objects.get(pk=self.kwargs['id'])
         contexto = {'usuario': usuario,
                     'formulario': CustomUserCreationForm(instance=usuario),
                     'titulo_janela' : 'Perfil',
@@ -67,29 +72,31 @@ class UsuarioReadView(View):
 #atualiza o usuario
 class UsuarioUpdateView(View):
     def get(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
-        formulario = CustomUserCreationForm(instance=usuario)
-        contexto = {'formulario': formulario,
+        usuario = Usuario.objects.get(pk=self.kwargs['id'])
+        formulario = UsuarioUpdateForm(instance=usuario)
+        contexto = {'usuario': usuario,
+                    'formulario': formulario,
                     'titulo_janela' : 'Atualizar conta',
                     'titulo_pagina': 'Atualizar Perfil do Usuário',
                     'botao' : 'Atualizar meu perfil',}
-        return render(request, "usuarios/perfil.html", contexto)
+        return render(request, "usuarios/atualizar.html", contexto)
 
     def post(self, request, *args, **kwargs):
-        usuario = get_object_or_404(Usuario, pk=id)
-        formulario = CustomUserCreationForm(request.POST, instance=usuario)
+        print(request.POST)
+        usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
+        formulario = UsuarioUpdateForm(request.POST, request.FILES, instance=usuario)
         if formulario.is_valid():
             usuario = formulario.save()
             usuario.save()
-            return HttpResponseRedirect(reverse_lazy("usuarios: perfil"))
+            return redirect("usuarios:perfil", id=usuario.id)
         else:
-            contexto = {'formulario': formulario, 'mensagem': 'Erro ao atualizar o perfil!'}
+            contexto = {'usuario': usuario, 'formulario': formulario, 'mensagem': 'Erro ao atualizar o perfil!'}
             return render(request, "usuarios/perfil.html", contexto)
 
 #deleta o usuario
 class UsuarioDeleteView(View):
     def get(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
+        usuario = Usuario.objects.get(pk=self.kwargs['id'])
         contexto = {'usuario': usuario,
                     'titulo_janela' : 'Deletar conta',
                     'titulo_pagina': 'Deletar Perfil do Usuário',
@@ -97,14 +104,14 @@ class UsuarioDeleteView(View):
         return render(request, "usuarios/deletar.html", contexto)
 
     def post(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
+        usuario = Usuario.objects.get(pk=self.kwargs['id'])
         usuario.delete()
         return HttpResponseRedirect(reverse_lazy("usuarios: login"))
 
 #lista as receitas do usuario
 class ReceitaListView(View):
     def get(self, request, *args, **kwargs):
-        usuario = Usuario.objects.get(pk=id)
+        usuario = Usuario.objects.get(pk=self.kwargs['id'])
         receitas = Receita.objects.filter(autor=usuario)
         contexto = {'usuario': usuario,
                     'receitas': receitas,
