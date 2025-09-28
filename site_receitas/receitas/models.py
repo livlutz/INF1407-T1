@@ -3,11 +3,12 @@ from usuarios.models import Usuario
 from site_receitas import settings
 # Create your models here.
 
-"""Criando a classe receita
-    A receita tera id, titulo, ingredientes, modo de preparo,
-    tempo de preparo, porcoes, categoria, foto da receita, autor e visibilidade
-"""
 class Receita(models.Model):
+    """Criando a classe receita
+        A receita tera id, titulo, ingredientes, modo de preparo,
+        tempo de preparo, porcoes, categoria, foto da receita, autor e visibilidade
+    """
+
     id = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=200, help_text='Digite o titulo da receita')
     ingredientes = models.TextField(help_text='Liste os ingredientes')
@@ -28,8 +29,9 @@ class Receita(models.Model):
     def __str__(self):
         return self.titulo
 
-    """Formata o tempo de preparo para horas e minutos"""
     def tempo_de_preparo_formatado(self):
+        """Formata o tempo de preparo para horas e minutos"""
+        
         horas = self.tempo_de_preparo // 60
         minutos = self.tempo_de_preparo % 60
         partes = []

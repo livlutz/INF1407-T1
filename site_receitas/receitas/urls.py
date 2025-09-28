@@ -7,7 +7,7 @@ from receitas import views
 #definindo o nome da aplicacao
 app_name = 'receitas'
 
-"""Guarda as rotas da aplicacao receitas"""
+# Guarda as rotas da aplicacao receitas
 urlpatterns = [
     path('', views.PubReceitasListView.as_view(), name = 'homepage'), #rota da homepage
     path('receita/<int:id>/', views.VerReceita.as_view(), name = 'ver_receita'), #rota para ver uma receita especifica
