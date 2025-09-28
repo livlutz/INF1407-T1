@@ -59,7 +59,7 @@ ROOT_URLCONF = "site_receitas.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'site_receitas/templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
