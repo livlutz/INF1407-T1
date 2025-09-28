@@ -76,11 +76,12 @@
     {% include 'usuarios/header.html'%}
     {% include 'usuarios/links.html'%}
     <div class="profile-card">
+        
         <div class="profile-avatar">
             {% if usuario.foto_de_perfil %}
-                <img src="{{ usuario.foto_de_perfil.url }}" alt="Avatar">
+                <img src="{{ usuario.foto_de_perfil.url }}" alt="Foto de perfil">
             {% else %}
-                <img src="{% static 'receitas/img/logo.png' %}" alt="Avatar">
+                <img src="{% static 'receitas/img/logo.png' %}" alt="Foto de perfil" class="logo-image">
             {% endif %}
         </div>
         <h2 class="profile-title">{{ usuario.username }}</h2>

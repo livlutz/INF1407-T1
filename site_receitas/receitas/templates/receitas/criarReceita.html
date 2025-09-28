@@ -15,7 +15,6 @@
             <h1 class="criar-receita-title">{{titulo_janela}}</h1>
             <form action="" method="POST" class="criar-receita-form">
                 <fieldset>
-                    <legend class="criar-receita-legend">Formulário de adicionar receita</legend>
                     {% csrf_token %}
                     <table class="formulario">
                         {{ formulario.as_table }}

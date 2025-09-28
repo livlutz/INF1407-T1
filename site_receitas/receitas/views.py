@@ -28,6 +28,7 @@ class ReceitasCreateView(View):
         formulario = ReceitaModel2Form(request.POST, request.FILES)
         if formulario.is_valid():
             receita = formulario.save(commit=False)
+            receita = formulario.save(commit=False)
             receita.autor = request.user
             receita.save()
             return HttpResponseRedirect(reverse_lazy("receitas:homepage"))
@@ -104,7 +105,7 @@ class VerReceita(View):
     def get(self, request,id, *args, **kwargs):
         """ Renderiza os detalhes da receita"""
         
-        receita = get_object_or_404(Receita, id=id)
+        receita = get_object_or_404(Receita, pk=self.kwargs['id'])
         contexto = { 'receita': receita,
                     'titulo_pagina': 'Ver receita',
                     'titulo_janela': 'Vendo receita',

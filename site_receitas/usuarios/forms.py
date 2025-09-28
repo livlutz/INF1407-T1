@@ -43,23 +43,15 @@ class CustomUserCreationForm(UserCreationForm):
             'password2': "Digite a mesma senha para verificação.",
         }
 
-
-class UsuarioModel2Form(forms.ModelForm):
+class UsuarioUpdateForm(forms.ModelForm):
     """Cria um formulário baseado no modelo Usuario"""
-
     class Meta:
         """Define os campos, rótulos e widgets para o formulário de usuário."""
         model = Usuario
-        fields = ['username', 'email', 'first_name', 'last_name']
-        labels = {
-            'username': 'Nome de usuário',
-            'email': 'Email',
-            'first_name': 'Primeiro nome',
-            'last_name': 'Sobrenome',
+        fields = ("username", "email", "foto_de_perfil")
+        help_texts = {
+            'username': "Atualize seu nome de usuário (letras, números e @/./+/-/_).",
+            'email': "Atualize seu email para recuperação de senha e notificações.",
+            'foto_de_perfil': "Atualize sua foto de perfil.",
         }
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-        }
+

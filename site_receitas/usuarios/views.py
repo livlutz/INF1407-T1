@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm, UsuarioModel2Form
+from usuarios.forms import CustomUserCreationForm, UsuarioLoginForm, UsuarioUpdateForm
 from usuarios.models import Usuario
 from receitas.models import Receita
 from django.contrib.auth import login as auth_login
@@ -44,6 +44,10 @@ def login(request):
     }
     return render(request, 'usuarios/login.html', contexto)
 
+def deletar(request):
+    return render(request, 'usuarios/deletar.html')
+
+#cria o usuario
 class UsuarioCreateView(View):
     """View de criar usuario"""
     def get(self, request, *args, **kwargs):
@@ -69,7 +73,7 @@ class UsuarioReadView(View):
     """View de ler/ mostrar usuario usada para mostrar o perfil do usuario"""
     def get(self, request, *args, **kwargs):
         """mostra o perfil do usuario"""
-        usuario = Usuario.objects.get(pk=kwargs.get('id'))
+        usuario = Usuario.objects.get(pk=self.kwargs['id'])
         contexto = {'usuario': usuario,
                     'formulario': CustomUserCreationForm(instance=usuario),
                     'titulo_janela' : 'Perfil',
@@ -81,8 +85,8 @@ class UsuarioUpdateView(View):
     """View de atualizar usuario"""
     def get(self, request, id, *args, **kwargs):
         """mostra o formulario de atualizar usuario"""
-        usuario = get_object_or_404(Usuario, pk=id)
-        formulario = UsuarioModel2Form(instance=usuario)
+        usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
+        formulario = UsuarioUpdateForm(instance=usuario)
         contexto = {
             'formulario': formulario,
             'usuario': usuario,
@@ -94,8 +98,8 @@ class UsuarioUpdateView(View):
 
     def post(self, request, id, *args, **kwargs):
         """realiza a atualização do usuario a partir do formulario"""
-        usuario = get_object_or_404(Usuario, pk=id)
-        formulario = UsuarioModel2Form(request.POST, instance=usuario)
+        usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
+        formulario = UsuarioUpdateForm(request.POST, instance=usuario)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect(reverse_lazy('usuario:perfil', kwargs={'id': id}))
@@ -113,7 +117,7 @@ class UsuarioDeleteView(View):
     """View de deletar usuario"""
     def get(self, request, id, *args, **kwargs):
         """mostra a confirmação de deletar usuario"""
-        usuario = get_object_or_404(Usuario, pk=id)
+        usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
         contexto = {
             'usuario': usuario,
             'titulo_janela': 'Deletar conta',
@@ -124,7 +128,7 @@ class UsuarioDeleteView(View):
 
     def post(self, request, id, *args, **kwargs):
         """realiza a deleção do usuario"""
-        usuario = get_object_or_404(Usuario, pk=id)
+        usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
         usuario.delete()
         return HttpResponseRedirect(reverse_lazy("usuario:login"))
 
@@ -132,7 +136,7 @@ class ReceitaListView(View):
     """View de listar as receitas do usuario, que inclui receitas publicas e privadas"""
     def get(self, request, id, *args, **kwargs):
         """mostra as receitas do usuario"""
-        usuario = get_object_or_404(Usuario, pk=id)
+        usuario = Usuario.objects.get(pk=self.kwargs['id'])
         receitas = Receita.objects.filter(autor=usuario)
         contexto = {
             'usuario': usuario,

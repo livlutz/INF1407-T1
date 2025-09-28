@@ -14,9 +14,9 @@
         <div class="ver-receita-card">
             <div class="ver-receita-img-wrap">
                 {% if receita.foto_da_receita %}
-                    <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="recipe-img">
+                    <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover" style="max-height: 300px">
                 {% else %}
-                    <img src="{% static 'receitas/img/default-recipe.png' %}" alt="{{ receita.titulo }}" class="recipe-img">
+                    <img src="{% static 'receitas/img/logo.png' %}" alt="Imagem padrão" class="w-full h-48 object-cover" style="max-height: 300px">
                 {% endif %}
             </div>
             <div class="ver-receita-content">
