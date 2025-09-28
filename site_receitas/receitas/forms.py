@@ -1,7 +1,7 @@
 from django import forms
 from receitas.models import Receita
-
 class ReceitaModel2Form(forms.ModelForm):
+    """Cria um formulario baseado no modelo Receita"""
     class Meta:
         model = Receita
         fields = ['titulo', 'foto_da_receita', 'ingredientes', 'modo_de_preparo', 

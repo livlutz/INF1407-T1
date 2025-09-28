@@ -36,10 +36,12 @@
                 <div class="receitas-scroll">
                     {% for receita in pub_receitas %}
                         <div class="bg-dark rounded-3xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-200 recipe-card">
-                            {% if receita.foto_da_receita %}
+                            {% if receita.foto_da_receita and receita.foto_da_receita.name %}
                                 <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="w-full h-48 object-cover">
                             {% else %}
-                                <img src="{% static 'receitas/img/logo.png' %}" alt="Imagem padrão" class="w-full h-48 object-cover">
+                                <div class="w-full h-48 bg-secondary d-flex align-items-center justify-content-center">
+                                    <span class="text-muted">Sem imagem</span>
+                                </div>
                             {% endif %}
                             <div class="p-6">
                                 <h3 class="text-xl font-semibold mb-2">{{ receita.titulo }}</h3>

@@ -19,6 +19,7 @@ def registro(request):
             return redirect('sec-home')
     else:
         formulario = UserCreationForm()
+
     context = {'form': formulario, }
-    return render(request,
-        'seguranca/registro.html', context)
+    
+    return render(request,'seguranca/registro.html', context)
