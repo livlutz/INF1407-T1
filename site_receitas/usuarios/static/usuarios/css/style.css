@@ -379,7 +379,7 @@ body {
   transition: background 0.2s;
 }
 .recipe-list li:hover {
-  background: #5865f2;
+  background: orangered;
 }
 .recipe-list a {
   color: #fff;
