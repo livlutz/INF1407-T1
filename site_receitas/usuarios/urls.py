@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from usuarios import views
-from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 
 
@@ -19,9 +19,7 @@ urlpatterns = [
     path('perfil/receitas/<int:id>/', views.ReceitaListView.as_view(), name='minhas_receitas'), #rota de receitas do usuario
     path('logout/', views.logout_confirm, name='logout_confirm'), #rota de confirmação de logout
     path('logout/real/', LogoutView.as_view(next_page=reverse_lazy('receitas:homepage')), name='logout'), #rota de logout
-    path('password_change_form/<int:id>/', PasswordChangeView.as_view(template_name='usuarios/password_change_form.html',
-                                                                    success_url=reverse_lazy('usuarios:sec-password-change-done', kwargs={'id': id})),
-                                                                    name='sec-password-change'), #rota de mudança de senha
-    path('password_change_done/<int:id>/', PasswordChangeDoneView.as_view(template_name='usuarios/password_change_done.html'), name='sec-password-change-done'), #rota de mudança de senha concluída
+    path('password_change_form/<int:id>/', views.MyPasswordChangeView.as_view(), name='sec-password-change'), #rota de mudança de senha
+    path('password_change_done', views.MyPasswordChangeDoneView.as_view(), name='sec-password-change-done'), #rota de mudança de senha concluída
     path('perfil/ver_receitas/<int:id>/', views.ReceitaListView.as_view(), name='ver_minhas_receitas'), #rota de ver receitas do usuario
-]
+    ]

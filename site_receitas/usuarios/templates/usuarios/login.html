@@ -1,37 +1,30 @@
+{% extends 'site_receitas/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'usuarios/css/style.css' %}">
-    <title>{{titulo_pagina}}</title>
-</head>
-<body class="bg-dark text-light">
-    {% include 'usuarios/header.html'%}
-    {% include 'usuarios/links.html'%}
-    <div class="login-card">
-        <div class="login-logo">
-            <img src="{% static 'receitas/img/receitas/logo.png' %}" alt="Logo" class="logo-image">
-        </div>
-        <h1 class="login-title">{{titulo_janela}}</h1>
-        <form action="" method="post" class="login-form">
-            <fieldset>
-                <legend class="login-legend">Formulário de Login</legend>
-                {% csrf_token %}
-                <table class="formulario">
-                {{ formulario.as_table }}
-                </table>
-                {% if mensagem %}
-                    <p class="login-msg">{{ mensagem }}</p>
-                {% endif %}
-                <button type="submit" class="modern-btn">Login</button>
-            </fieldset>
-        </form>
-        <div class="signup-link">
-            Não tem uma conta? <a href="{% url 'usuarios:cadastro' %}">Cadastre-se!</a>
-        </div>
+
+{% block titulo %}{{ titulo_pagina }}{% endblock %}
+{% block content %}
+<div class="login-card">
+    <div class="login-logo">
+        <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
     </div>
-</body>
-</html>
+    <h1 class="login-title">{{titulo_janela}}</h1>
+    <form action="" method="post" class="login-form">
+        <fieldset>
+            {% csrf_token %}
+            <table class="formulario">
+            {{ formulario.as_table }}
+            </table>
+            {% if mensagem %}
+                <p class="login-msg">{{ mensagem }}</p>
+            {% endif %}
+            <button type="submit" class="modern-btn">Login</button>
+        </fieldset>
+    </form>
+
+    <a href="{% url 'password_reset' %}">Esqueceu a senha?</a>
+    
+    <div class="signup-link">
+        Não tem uma conta? <a href="{% url 'usuarios:cadastro' %}">Cadastre-se!</a>
+    </div>
+</div>
+{% endblock %}
