@@ -314,6 +314,13 @@ header {
   padding: 1rem 0;
 }
 
+.user-name {
+  color: #ffe0b2;
+  font-weight: 600;
+  align-self: center;
+  margin-left: 10px;
+  font-size: 1rem;
+}
 
 .hero-section {
   background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);

@@ -8,6 +8,8 @@ from usuarios.models import Usuario
 from receitas.models import Receita
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+
 
 # Create your views here.
 
@@ -99,7 +101,7 @@ class UsuarioUpdateView(View):
     def post(self, request, id, *args, **kwargs):
         """realiza a atualização do usuario a partir do formulario"""
         usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
-        formulario = UsuarioUpdateForm(request.POST, instance=usuario)
+        formulario = UsuarioUpdateForm(request.POST, request.FILES, instance=usuario)
         if formulario.is_valid():
             formulario.save()
             return HttpResponseRedirect(reverse_lazy('usuarios:perfil', kwargs={'id': id}))
@@ -145,3 +147,10 @@ class ReceitaListView(View):
             'titulo_pagina': 'Receitas do Usuário',
         }
         return render(request, "usuarios/ver_minhas_receitas.html", contexto)
+
+class MyPasswordChangeView(PasswordChangeView):
+    template_name = 'usuarios/password_change_form.html'
+    success_url = reverse_lazy('usuarios:sec-password-change-done')
+
+class MyPasswordChangeDoneView(PasswordChangeDoneView):
+    template_name = 'usuarios/password_change_done.html'

@@ -8,11 +8,22 @@ em uma página HTML use:
   {% if user.is_authenticated %}
     <a href="{% url 'usuarios:logout_confirm' %}" class="modern-btn">Logout</a>
     <a href="{% url 'usuarios:perfil' user.id %}" class="modern-btn">Perfil</a>
+    <div class="author-avatar" style="align-self: center;">
+        {% if user.foto_de_perfil %}
+            <img src="{{ user.foto_de_perfil.url }}" alt="{{ user.username }}" class="author-profile-pic">
+        {% else %}
+            <div class="author-profile-pic author-default-pic">
+                {{ user.username|first|upper }}
+            </div>
+        {% endif %}
+    </div>
   {% else %}
     <a href="{% url 'usuarios:login' %}" class="modern-btn">Login</a>
     <a href="{% url 'usuarios:cadastro' %}" class="modern-btn">Cadastro</a>   
   {% endif %}
-    Você é {% firstof user.username "visitante" %}
+  <div class="user-name">
+    {% firstof user.username "Visitante" %}
+  </div>
 
   <!-- <a href="{ url 'perfil' pk=usuario.id %}" class="modern-btn">Perfil</a> -->
 </nav>
