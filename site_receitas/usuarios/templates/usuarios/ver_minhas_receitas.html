@@ -1,17 +1,71 @@
 {% extends 'site_receitas/base.html' %}
 {% load static %}
+
 {% block titulo %}{{ titulo_pagina }}{% endblock %}
 {% block content %}
-<div class="recipe-card">
-    <h2 class="recipe-title">{{titulo_pagina}}</h2>
-    <ul class="recipe-list">
-        {% for receita in receitas %}
-            <li>
-                <a href="{% url 'receitas:ver_receita' receita.id %}">{{ receita.titulo }}</a>
-            </li>
-        {% empty %}
-            <li>Nenhuma receita encontrada.</li>
-        {% endfor %}
-    </ul>
+<div class="minhas-receitas-container">
+    <div class="minhas-receitas-header">
+        <h2 class="page-title">{{ titulo_pagina }}</h2>
+        <div class="header-actions">
+            <a href="{% url 'receitas:criar_receita' %}" class="modern-btn create-recipe-btn">
+                <span class="btn-icon">➕</span>
+                <span>Criar Nova Receita</span>
+            </a>
+        </div>
+    </div>
+
+    <section class="recipes-section">
+        {% if receitas %}
+            <div class="recipes-count">
+                <span class="count-badge">{{ receitas|length }} receita{{ receitas|length|pluralize:"s" }} encontrada{{ receitas|length|pluralize:"s" }}</span>
+            </div>
+
+            <div class="recipes-grid">
+                {% for receita in receitas %}
+                    <div class="recipe-card-tg">
+                        <div class="recipe-image-container">
+                            {% if receita.foto_da_receita and receita.foto_da_receita.name %}
+                                <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="recipe-image">
+                            {% else %}
+                                <div class="recipe-image recipe-no-image">
+                                    <span>Sem imagem</span>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="recipe-content">
+                            <h3 class="recipe-title">
+                                <a href="{% url 'receitas:ver_receita' receita.id %}">{{ receita.titulo }}</a>
+                            </h3>
+                            <div class="recipe-meta">
+                                <div class="recipe-author">
+                                    <div class="author-avatar">
+                                        {% if receita.autor.foto_de_perfil %}
+                                            <img src="{{ receita.autor.foto_de_perfil.url }}" alt="{{ receita.autor.username }}" class="author-profile-pic">
+                                        {% else %}
+                                            <div class="author-profile-pic author-default-pic">
+                                                {{ receita.autor.username|first|upper }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <span class="author-name">Por {{ receita.autor.username|default:"TudoGostoso" }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h3 class="empty-title">Nenhuma receita encontrada</h3>
+                <p class="empty-description">Você ainda não criou nenhuma receita. Que tal começar agora?</p>
+                <a href="{% url 'receitas:criar_receita' %}" class="modern-btn create-first-recipe-btn">
+                    <span class="btn-icon">🚀</span>
+                    <span>Criar Minha Primeira Receita</span>
+                </a>
+            </div>
+        {% endif %}
+    </section>
 </div>
 {% endblock %}

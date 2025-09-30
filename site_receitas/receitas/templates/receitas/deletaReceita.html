@@ -10,17 +10,25 @@
     {% include 'receitas/header.html'%}
 </head>
 <body class="bg-dark text-light">
-    <div class="login-container">
-        <h2>{{titulo_janela}}</h2>
-        {% block content %}
-        <form method="post">
-            {% csrf_token %}
-            <table class="formulario">
-                {{ form.as_table }}
-            </table>
-            <button type="submit" class="btn modern-btn">{{botao}}</button>
-        </form>
-        {% endblock %}
+    <div class="delete-recipe-container">
+        <div class="delete-recipe-card">
+            <div class="delete-recipe-header">
+                <h2 class="delete-recipe-title">{{titulo_janela}}</h2>
+            </div>
+            {% block content %}
+            <form method="post" class="delete-recipe-form">
+                {% csrf_token %}
+                <div class="form-content">
+                    <table class="formulario">
+                        {{ form.as_table }}
+                    </table>
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="btn delete-recipe-btn">{{botao}}</button>
+                </div>
+            </form>
+            {% endblock %}
+        </div>
     </div>
 </body>
 </html>

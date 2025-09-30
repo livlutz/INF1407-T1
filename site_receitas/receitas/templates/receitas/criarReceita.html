@@ -1,30 +1,143 @@
+{% extends 'site_receitas/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{titulo.pagina}}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
-</head>
-<body class="bg-dark text-light">
-    {% include 'receitas/header.html'%}
-    <div class="criar-receita-container">
-        <div class="criar-receita-card">
-            <h1 class="criar-receita-title">{{titulo_janela}}</h1>
-            <form action="" method="POST" class="criar-receita-form">
-                <fieldset>
-                    {% csrf_token %}
-                    <table class="formulario">
-                        {{ formulario.as_table }}
-                    </table>
-                    {% if mensagem %}
-                        <p class="criar-receita-msg">{{ mensagem }}</p>
-                    {% endif %}
-                    <button type="submit" class="modern-btn">Adicionar</button>
-                </fieldset>
-            </form>
+
+{% block titulo %}{{ titulo_pagina }}{% endblock %}
+{% block content %}
+<div class="criar-receita-container">
+    <div class="criar-receita-card">
+        <!-- Header Section -->
+        <div class="criar-receita-header">
+            <h1 class="criar-receita-title">{{ titulo_janela }}</h1>
         </div>
+
+        <!-- Form Section -->
+        <form action="" method="POST" enctype="multipart/form-data" class="criar-receita-form">
+            <fieldset>
+                {% csrf_token %}
+
+                <!-- Recipe Title -->
+                <div class="form-group">
+                    {{ formulario.titulo.label_tag }}
+                    {{ formulario.titulo }}
+                    {% if formulario.titulo.help_text %}
+                        <div class="help-text">{{ formulario.titulo.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.titulo.errors %}
+                        <div class="field-errors">{{ formulario.titulo.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Recipe Photo -->
+                <div class="form-group photo-upload">
+                    {{ formulario.foto_da_receita.label_tag }}
+                    <div class="file-upload-wrapper">
+                        {{ formulario.foto_da_receita }}
+                        <div class="file-upload-info">
+                            <i class="upload-icon">📸</i>
+                            <span class="upload-text">Clique para adicionar uma foto da receita</span>
+                        </div>
+                    </div>
+                    {% if formulario.foto_da_receita.help_text %}
+                        <div class="help-text">{{ formulario.foto_da_receita.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.foto_da_receita.errors %}
+                        <div class="field-errors">{{ formulario.foto_da_receita.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Recipe Details Grid -->
+                <div class="recipe-details-grid">
+                    <!-- Tempo de Preparo -->
+                    <div class="form-group">
+                        {{ formulario.tempo_de_preparo.label_tag }}
+                        {{ formulario.tempo_de_preparo }}
+                        {% if formulario.tempo_de_preparo.help_text %}
+                            <div class="help-text">{{ formulario.tempo_de_preparo.help_text }}</div>
+                        {% endif %}
+                        {% if formulario.tempo_de_preparo.errors %}
+                            <div class="field-errors">{{ formulario.tempo_de_preparo.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Porções -->
+                    <div class="form-group">
+                        {{ formulario.porcoes.label_tag }}
+                        {{ formulario.porcoes }}
+                        {% if formulario.porcoes.help_text %}
+                            <div class="help-text">{{ formulario.porcoes.help_text }}</div>
+                        {% endif %}
+                        {% if formulario.porcoes.errors %}
+                            <div class="field-errors">{{ formulario.porcoes.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Categoria -->
+                    <div class="form-group">
+                        {{ formulario.categoria.label_tag }}
+                        {{ formulario.categoria }}
+                        {% if formulario.categoria.help_text %}
+                            <div class="help-text">{{ formulario.categoria.help_text }}</div>
+                        {% endif %}
+                        {% if formulario.categoria.errors %}
+                            <div class="field-errors">{{ formulario.categoria.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Visibilidade -->
+                    <div class="form-group">
+                        {{ formulario.visibilidade.label_tag }}
+                        {{ formulario.visibilidade }}
+                        {% if formulario.visibilidade.help_text %}
+                            <div class="help-text">{{ formulario.visibilidade.help_text }}</div>
+                        {% endif %}
+                        {% if formulario.visibilidade.errors %}
+                            <div class="field-errors">{{ formulario.visibilidade.errors }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Ingredientes -->
+                <div class="form-group textarea-group">
+                    {{ formulario.ingredientes.label_tag }}
+                    {{ formulario.ingredientes }}
+                    {% if formulario.ingredientes.help_text %}
+                        <div class="help-text">{{ formulario.ingredientes.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.ingredientes.errors %}
+                        <div class="field-errors">{{ formulario.ingredientes.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Modo de Preparo -->
+                <div class="form-group textarea-group">
+                    {{ formulario.modo_de_preparo.label_tag }}
+                    {{ formulario.modo_de_preparo }}
+                    {% if formulario.modo_de_preparo.help_text %}
+                        <div class="help-text">{{ formulario.modo_de_preparo.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.modo_de_preparo.errors %}
+                        <div class="field-errors">{{ formulario.modo_de_preparo.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Messages -->
+                {% if mensagem %}
+                    <div class="criar-receita-msg success">{{ mensagem }}</div>
+                {% endif %}
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="submit" class="modern-btn criar-receita-btn">
+                        <span class="btn-icon">🍽️</span>
+                        <span>Criar Receita</span>
+                    </button>
+                    <a href="{% url 'receitas:homepage' %}" class="modern-btn secondary-btn">
+                        <span class="btn-icon">↩️</span>
+                        <span>Cancelar</span>
+                    </a>
+                </div>
+            </fieldset>
+        </form>
     </div>
-</body>
+</div>
+{% endblock %}
