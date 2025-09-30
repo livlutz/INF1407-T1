@@ -1,21 +1,16 @@
+{% extends 'site_receitas/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8hE68aNjrXkE5E5h5l7O3O6j6N6p6c6" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
-    <title>{{titulo_pagina}}</title>
-    {% include 'receitas/header.html'%}
-</head>
-<body class="bg-dark text-light">
-    <div class="delete-recipe-container">
+
+{% block titulo %}{{titulo_pagina}}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
+
+<div class="delete-recipe-container">
         <div class="delete-recipe-card">
             <div class="delete-recipe-header">
                 <h2 class="delete-recipe-title">{{titulo_janela}}</h2>
             </div>
-            {% block content %}
             <form method="post" class="delete-recipe-form">
                 {% csrf_token %}
                 <div class="form-content">
@@ -27,9 +22,7 @@
                     <button type="submit" class="btn delete-recipe-btn">{{botao}}</button>
                 </div>
             </form>
-            {% endblock %}
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
 
