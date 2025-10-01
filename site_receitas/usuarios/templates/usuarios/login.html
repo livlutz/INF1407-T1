@@ -5,6 +5,7 @@
 {% block content %}
 <div class="login-card">
     <h1 class="login-title">{{titulo_janela}}</h1>
+    <!--Mostra o formulário de login-->
     <form action="" method="post" class="login-form">
         <fieldset>
             {% csrf_token %}
@@ -20,6 +21,7 @@
         </fieldset>
     </form>
 
+    <!--Links para resetar senha e cadastro-->
     <a href="{% url 'password_reset' %}">Esqueceu a senha?</a>
 
     <div class="signup-link">

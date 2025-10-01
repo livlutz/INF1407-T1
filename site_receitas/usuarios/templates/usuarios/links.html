@@ -1,7 +1,5 @@
 <!--
-Para incluir esse fragmento de página HTML
-em uma página HTML use:
-{ % include 'usuarios/links.html' % }
+Pagina de links de navegação, incluindo Home, Login, Logout, Cadastro e Perfil.
 -->
 <nav class="nav-links">
   <a href="/" class="modern-btn">Home-Page</a>
@@ -19,7 +17,7 @@ em uma página HTML use:
     </div>
   {% else %}
     <a href="{% url 'usuarios:login' %}" class="modern-btn">Login</a>
-    <a href="{% url 'usuarios:cadastro' %}" class="modern-btn">Cadastro</a>   
+    <a href="{% url 'usuarios:cadastro' %}" class="modern-btn">Cadastro</a>
   {% endif %}
   <div class="user-name">
     {% firstof user.username "Visitante" %}

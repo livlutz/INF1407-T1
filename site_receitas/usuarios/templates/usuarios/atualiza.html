@@ -10,22 +10,25 @@
             <h1 class="atualiza-title">{{ titulo_pagina }}</h1>
         </div>
 
-        <!-- Current Profile Preview -->
+        <!-- Preview do perfil atual -->
         <div class="current-profile-preview">
             <div class="current-avatar">
+                <!--Mostra a foto de perfil atual-->
                 {% if formulario.instance.foto_de_perfil %}
                     <img src="{{ formulario.instance.foto_de_perfil.url }}" alt="Foto atual" class="preview-image">
                 {% else %}
                     <img src="{% static 'receitas/img/logo.png' %}" alt="Foto padrão" class="preview-image">
                 {% endif %}
             </div>
+
+            <!--Mostra as informações do perfil atual-->
             <div class="current-info">
                 <p class="current-username">{{ formulario.instance.username }}</p>
                 <p class="current-email">{{ formulario.instance.email }}</p>
             </div>
         </div>
 
-        <!-- Form Section -->
+        <!-- Formulário de Atualização de perfil -->
         <form method="post" enctype="multipart/form-data" class="atualiza-form">
             <fieldset>
                 {% csrf_token %}
