@@ -1,32 +1,40 @@
-# Primeiro trabalho de Programção para a web (INF1407) de 2025.2
+# 🍳 Receitinhas da Vovó
+## Primeiro trabalho de Programação para a Web (INF1407) - 2025.2
 
 ![Contributors](https://img.shields.io/github/contributors/livlutz/INF1407-T1)
 ![Python](https://img.shields.io/badge/python-3670A0?style=plastic&logo=python&logoColor=ffdd54)
+![Django](https://img.shields.io/badge/django-%23092E20.svg?style=plastic&logo=django&logoColor=white)
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=plastic&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/css-%231572B6.svg?style=plastic&logo=css3&logoColor=white)
 ![Shell Script](https://img.shields.io/badge/shell_script-%23121011.svg?style=plastic&logo=gnu-bash&logoColor=white)
 
-## 🤝 Membros da Dupla
+## 👥 Membros da Dupla
 
-* **Lívia Lutz dos Santos** - 2211055
-* **Luiza Marcondes Paes Leme** - 2210275
+| Nome | Matrícula |
+|------|-----------|
+| **Lívia Lutz dos Santos** | 2211055 |
+| **Luiza Marcondes Paes Leme** | 2210275 |
 
+---
 
+## 📖 Sobre o Projeto
 
-## Receitinhas da Vovó
-Este é um projeto de um site de receitas. Neste site, os usuarios podem:
+**Receitinhas da Vovó** é uma plataforma web completa para compartilhamento de receitas culinárias, desenvolvida com Django. O sistema oferece uma experiência moderna e intuitiva para usuários compartilharem suas receitas favoritas com a comunidade.
 
-* Ver receitas públicas postadas por outros usuarios
-* Fazer seu cadastro no sistema informando nome de usuário, email e uma senha
-* Adicionar receitas tanto públicas (permitindo que outros usuários a vejam) quanto privadas (criando a receita apenas para visualização própria)
+### 🎯 Funcionalidades Principais
 
+- 🔍 **Visualização de Receitas**: Navegue por receitas públicas de outros usuários
+- 👤 **Sistema de Usuários**: Cadastro completo com perfil personalizado
+- 📝 **Gerenciamento de Receitas**: Crie, edite e delete suas próprias receitas
+- 🔒 **Controle de Privacidade**: Receitas públicas ou privadas
+- 📸 **Upload de Imagens**: Adicione fotos para receitas e perfis
+- 🎨 **Interface Moderna**: Design responsivo com tema escuro e elementos interativos
 
-# ⚙️ Configuração do Ambiente
+---
 
-Para rodar este projeto, é necessário configurar um **ambiente virtual (venv)**.
+## 🚀 Início Rápido
 
-Com o intuito de facilitar a configuração do ambiente, apenas rode o script run.sh no terminal da seguinte forma:
-
+### Instalação Automática
 ```bash
     ./run.sh
 ```

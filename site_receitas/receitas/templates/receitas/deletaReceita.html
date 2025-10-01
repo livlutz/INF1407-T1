@@ -1,3 +1,4 @@
+<!--Pegando configuracoes basicas das paginas do site-->
 {% extends 'site_receitas/base.html' %}
 {% load static %}
 
@@ -6,13 +7,16 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
 
+<!-- Container Principal -->
 <div class="delete-recipe-container">
+    <!-- Card de Deletar Receita -->
         <div class="delete-recipe-card">
             <div class="delete-recipe-header">
                 <h2 class="delete-recipe-title">{{titulo_janela}}</h2>
             </div>
             <form method="post" class="delete-recipe-form">
                 {% csrf_token %}
+                <!--formulario de deletar receita -->
                 <div class="form-content">
                     <table class="formulario">
                         {{ form.as_table }}

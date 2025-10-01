@@ -1,20 +1,22 @@
+<!--Pegando configuracoes basicas das paginas do site-->
 {% extends 'site_receitas/base.html' %}
 {% load static %}
 
 {% block titulo %}{{ titulo_pagina }}{% endblock %}
 {% block content %}
+<!--Header Section-->
 <div class="atualiza-receita-container">
     <div class="atualiza-receita-card">
-        <!-- Header Section -->
         <div class="atualiza-receita-header">
             <h1 class="atualiza-receita-title">{{ titulo_janela }}</h1>
             <p class="atualiza-receita-subtitle">Edite as informações da sua receita</p>
         </div>
 
-        <!-- Current Recipe Preview -->
+        <!-- Preview da receita -->
         {% if formulario.instance %}
         <div class="current-recipe-preview">
             <div class="current-recipe-image">
+                <!-- Mostra a foto atual da receita ou um placeholder se não houver foto -->
                 {% if formulario.instance.foto_da_receita %}
                     <img src="{{ formulario.instance.foto_da_receita.url }}" alt="Foto atual da receita" class="preview-image">
                 {% else %}
@@ -24,11 +26,12 @@
                     </div>
                 {% endif %}
             </div>
+            <!-- Informações da receita -->
             <div class="current-recipe-info">
                 <h3 class="current-recipe-title">{{ formulario.instance.titulo }}</h3>
                 <div class="current-recipe-meta">
                     <span class="meta-item">⏱️ {{ formulario.instance.tempo_de_preparo }} min</span>
-                    <span class="meta-item">👥 {{ formulario.instance.rendimento }} porções</span>
+                    <span class="meta-item">👥 {{ formulario.instance.porcoes }} porções</span>
                     {% if formulario.instance.categoria %}
                         <span class="meta-item">🏷️ {{ formulario.instance.categoria }}</span>
                     {% endif %}
@@ -37,12 +40,12 @@
         </div>
         {% endif %}
 
-        <!-- Form Section -->
+        <!-- Formulario de Atualização das receitas -->
         <form method="post" enctype="multipart/form-data" class="atualiza-receita-form">
             <fieldset>
                 {% csrf_token %}
 
-                <!-- Recipe Title -->
+                <!--Mostra o formulario de atualização da receita-->
                 <div class="form-group">
                     {{ formulario.titulo.label_tag }}
                     {{ formulario.titulo }}
@@ -54,7 +57,7 @@
                     {% endif %}
                 </div>
 
-                <!-- Recipe Photo -->
+                <!-- Mostra a foto da receita -->
                 <div class="form-group photo-upload">
                     {{ formulario.foto_da_receita.label_tag }}
                     <div class="file-upload-wrapper">
@@ -72,9 +75,8 @@
                     {% endif %}
                 </div>
 
-                <!-- Recipe Details Grid -->
+                <!-- Detalhes da Receita -->
                 <div class="recipe-details-grid">
-                    <!-- Tempo de Preparo -->
                     <div class="form-group">
                         {{ formulario.tempo_de_preparo.label_tag }}
                         {{ formulario.tempo_de_preparo }}
@@ -86,27 +88,15 @@
                         {% endif %}
                     </div>
 
-                    <!-- Rendimento -->
+                    <!-- Porções -->
                     <div class="form-group">
-                        {{ formulario.rendimento.label_tag }}
-                        {{ formulario.rendimento }}
-                        {% if formulario.rendimento.help_text %}
-                            <div class="help-text">{{ formulario.rendimento.help_text }}</div>
+                        {{ formulario.porcoes.label_tag }}
+                        {{ formulario.porcoes }}
+                        {% if formulario.porcoes.help_text %}
+                            <div class="help-text">{{ formulario.porcoes.help_text }}</div>
                         {% endif %}
-                        {% if formulario.rendimento.errors %}
-                            <div class="field-errors">{{ formulario.rendimento.errors }}</div>
-                        {% endif %}
-                    </div>
-
-                    <!-- Dificuldade -->
-                    <div class="form-group">
-                        {{ formulario.dificuldade.label_tag }}
-                        {{ formulario.dificuldade }}
-                        {% if formulario.dificuldade.help_text %}
-                            <div class="help-text">{{ formulario.dificuldade.help_text }}</div>
-                        {% endif %}
-                        {% if formulario.dificuldade.errors %}
-                            <div class="field-errors">{{ formulario.dificuldade.errors }}</div>
+                        {% if formulario.porcoes.errors %}
+                            <div class="field-errors">{{ formulario.porcoes.errors }}</div>
                         {% endif %}
                     </div>
 
@@ -135,7 +125,7 @@
                     {% endif %}
                 </div>
 
-                <!-- Instructions -->
+                <!-- Instrucoes de preparo -->
                 <div class="form-group textarea-group">
                     {{ formulario.modo_de_preparo.label_tag }}
                     {{ formulario.modo_de_preparo }}
@@ -147,7 +137,7 @@
                     {% endif %}
                 </div>
 
-                <!-- Visibility -->
+                <!-- Visibilidade -->
                 {% if formulario.visibilidade %}
                 <div class="form-group">
                     {{ formulario.visibilidade.label_tag }}
@@ -161,12 +151,17 @@
                 </div>
                 {% endif %}
 
-                <!-- Messages -->
                 {% if mensagem %}
-                    <div class="atualiza-receita-msg success">{{ mensagem }}</div>
+                    <div class="atualiza-receita-msg error">{{ mensagem }}</div>
                 {% endif %}
 
-                <!-- Form Actions -->
+                {% if formulario.non_field_errors %}
+                    <div class="atualiza-receita-msg error">
+                        {{ formulario.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <!-- Acoes do formulario -->
                 <div class="form-actions">
                     <button type="submit" class="atualiza-receita-btn">
                         <i class="btn-icon">💾</i>

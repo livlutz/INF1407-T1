@@ -6,10 +6,12 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
 
+<!-- Mostra detalhes da receita -->
 <main class="container py-5 mt-4">
         <section class="recipe-detail-section">
             <div class="recipe-detail-card">
                 <div class="recipe-detail-image-container">
+                    <!-- Mostra a foto atual da receita ou um placeholder se não houver foto -->
                     {% if receita.foto_da_receita %}
                         <img src="{{ receita.foto_da_receita.url }}" alt="{{ receita.titulo }}" class="recipe-detail-image">
                     {% else %}
@@ -18,6 +20,7 @@
                         </div>
                     {% endif %}
                 </div>
+                <!-- Informações da receita -->
                 <div class="recipe-detail-content">
                     <h1 class="recipe-detail-title">{{ receita.titulo }}</h1>
                     <div class="recipe-detail-meta">
@@ -40,7 +43,7 @@
                         </div>
                     </div>
 
-                    <!-- Author-only action buttons -->
+                    <!-- Acoes restritas aos autores da receita -->
                     {% if user.is_authenticated and user == receita.autor %}
                         <div class="recipe-actions mb-4">
                             <a href="{% url 'receitas:editar_receita' receita.id %}" class="btn-tg-orange mr-2">
@@ -52,20 +55,19 @@
                         </div>
                     {% endif %}
 
+                    <!-- Ingredientes -->
                     <div class="recipe-detail-section">
                         <h2 class="recipe-section-title">Ingredientes</h2>
-                        <ul class="recipe-ingredients-list">
-                            {% for ingrediente in receita.ingredientes.splitlines %}
-                                <li>{{ ingrediente }}</li>
-                            {% endfor %}
-                        </ul>
+                        <div class="recipe-instructions">{{ receita.ingredientes|linebreaks }}</div>
                     </div>
 
+                    <!-- Modo de Preparo -->
                     <div class="recipe-detail-section">
                         <h2 class="recipe-section-title">Modo de Preparo</h2>
                         <div class="recipe-instructions">{{ receita.modo_de_preparo|linebreaks }}</div>
                     </div>
 
+                    <!-- Botao de voltar a homepage -->
                     <div class="recipe-actions mt-4">
                         <a href="{% url 'receitas:homepage' %}" class="btn-tg-orange">
                             ← Voltar às Receitas

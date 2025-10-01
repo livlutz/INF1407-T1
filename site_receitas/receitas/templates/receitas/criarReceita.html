@@ -1,3 +1,4 @@
+<!--Pegando configuracoes basicas das paginas do site-->
 {% extends 'site_receitas/base.html' %}
 {% load static %}
 
@@ -10,12 +11,12 @@
             <h1 class="criar-receita-title">{{ titulo_janela }}</h1>
         </div>
 
-        <!-- Form Section -->
+        <!-- Formulario de Criação da Receita -->
         <form action="" method="POST" enctype="multipart/form-data" class="criar-receita-form">
             <fieldset>
                 {% csrf_token %}
 
-                <!-- Recipe Title -->
+                <!-- Título da Receita -->
                 <div class="form-group">
                     {{ formulario.titulo.label_tag }}
                     {{ formulario.titulo }}
@@ -27,7 +28,7 @@
                     {% endif %}
                 </div>
 
-                <!-- Recipe Photo -->
+                <!-- Mostra a foto da receita -->
                 <div class="form-group photo-upload">
                     {{ formulario.foto_da_receita.label_tag }}
                     <div class="file-upload-wrapper">
@@ -45,7 +46,7 @@
                     {% endif %}
                 </div>
 
-                <!-- Recipe Details Grid -->
+                <!-- Detalhes da Receita -->
                 <div class="recipe-details-grid">
                     <!-- Tempo de Preparo -->
                     <div class="form-group">
@@ -120,12 +121,11 @@
                     {% endif %}
                 </div>
 
-                <!-- Messages -->
                 {% if mensagem %}
                     <div class="criar-receita-msg success">{{ mensagem }}</div>
                 {% endif %}
 
-                <!-- Form Actions -->
+                <!-- Acoes do formulario -->
                 <div class="form-actions">
                     <button type="submit" class="modern-btn criar-receita-btn">
                         <span class="btn-icon">🍽️</span>
