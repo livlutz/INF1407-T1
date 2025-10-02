@@ -4,10 +4,8 @@
 {% block titulo %}{{ titulo_pagina }}{% endblock %}
 {% block content %}
 <div class="login-card">
-    <div class="login-logo">
-        <img src="{% static 'receitas/img/logo.png' %}" alt="Logo" class="logo-image">
-    </div>
     <h1 class="login-title">{{titulo_janela}}</h1>
+    <!--Mostra o formulário de login-->
     <form action="" method="post" class="login-form">
         <fieldset>
             {% csrf_token %}
@@ -17,12 +15,15 @@
             {% if mensagem %}
                 <p class="login-msg">{{ mensagem }}</p>
             {% endif %}
-            <button type="submit" class="modern-btn">Login</button>
+            <div style="text-align: center;">
+                <button type="submit" class="modern-btn">Login</button>
+            </div>
         </fieldset>
     </form>
 
+    <!--Links para resetar senha e cadastro-->
     <a href="{% url 'password_reset' %}">Esqueceu a senha?</a>
-    
+
     <div class="signup-link">
         Não tem uma conta? <a href="{% url 'usuarios:cadastro' %}">Cadastre-se!</a>
     </div>

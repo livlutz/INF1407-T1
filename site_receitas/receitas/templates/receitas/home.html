@@ -1,23 +1,19 @@
+{% extends 'site_receitas/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{{ titulo.pagina }}</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
-    </head>
-    <body class="bg-dark text-light">
-        {% include 'receitas/header.html' %}
 
-        <main class="container py-5 mt-4">
+{% block titulo %}{{ titulo.pagina }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
+
+<!-- Header Section -->
+<main class="container py-5 mt-4">
             {% if user.is_authenticated %}
                 <div class="text-center mb-4">
                     <a href="{% url 'receitas:criar_receita' %}" class="modern-btn">Criar Nova Receita</a>
                 </div>
             {% endif %}
-
+            <!-- Mostra receitas publicas -->
             <section class="recipes-section">
                 <h2 class="section-title text-center mb-4">Confira nossas receitas</h2>
                 <div class="recipes-grid">
@@ -60,6 +56,5 @@
                 </div>
             </section>
         </main>
-    </body>
-</html>
+{% endblock %}
 

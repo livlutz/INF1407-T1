@@ -5,22 +5,100 @@
 {% block content %}
 <div class="cadastro-container">
     <div class="cadastro-card">
-        <h1 class="cadastro-title">{{titulo_janela}}</h1>
+        <!-- Header Section -->
+        <div class="cadastro-header">
+            <h1 class="cadastro-title">{{titulo_janela}}</h1>
+        </div>
+
+        <!-- Form Section -->
         <form action="" method="POST" class="cadastro-form">
             <fieldset>
                 {% csrf_token %}
-                <table class="formulario">
-                    {{ formulario.as_table }}
-                </table>
+
+                <!-- formulario de cadastro -->
+                <div class="form-group">
+                    {{ formulario.username.label_tag }}
+                    {{ formulario.username }}
+                    {% if formulario.username.help_text %}
+                        <div class="help-text">{{ formulario.username.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.username.errors %}
+                        <div class="field-errors">{{ formulario.username.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ formulario.email.label_tag }}
+                    {{ formulario.email }}
+                    {% if formulario.email.help_text %}
+                        <div class="help-text">{{ formulario.email.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.email.errors %}
+                        <div class="field-errors">{{ formulario.email.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ formulario.first_name.label_tag }}
+                    {{ formulario.first_name }}
+                    {% if formulario.first_name.help_text %}
+                        <div class="help-text">{{ formulario.first_name.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.first_name.errors %}
+                        <div class="field-errors">{{ formulario.first_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ formulario.last_name.label_tag }}
+                    {{ formulario.last_name }}
+                    {% if formulario.last_name.help_text %}
+                        <div class="help-text">{{ formulario.last_name.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.last_name.errors %}
+                        <div class="field-errors">{{ formulario.last_name.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ formulario.password1.label_tag }}
+                    {{ formulario.password1 }}
+                    {% if formulario.password1.help_text %}
+                        <div class="help-text">{{ formulario.password1.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.password1.errors %}
+                        <div class="field-errors">{{ formulario.password1.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ formulario.password2.label_tag }}
+                    {{ formulario.password2 }}
+                    {% if formulario.password2.help_text %}
+                        <div class="help-text">{{ formulario.password2.help_text }}</div>
+                    {% endif %}
+                    {% if formulario.password2.errors %}
+                        <div class="field-errors">{{ formulario.password2.errors }}</div>
+                    {% endif %}
+                </div>
+
+                <!-- Messages -->
                 {% if mensagem %}
                     <p class="cadastro-msg">{{ mensagem }}</p>
                 {% endif %}
-                <button type="submit" class="modern-btn">Cadastrar</button>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit" class="modern-btn cadastro-btn">Criar Conta</button>
+                </div>
             </fieldset>
         </form>
+
+        <!-- Login Link -->
         <div class="login-link">
-            Já tem uma conta? <a href="{% url 'usuarios:login' %}">Login</a>
+            Já tem uma conta? <a href="{% url 'usuarios:login' %}" class="login-link-text">Login</a>
         </div>
+
     </div>
 </div>
 {% endblock %}

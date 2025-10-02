@@ -1,27 +1,32 @@
+<!--Pegando configuracoes basicas das paginas do site-->
+{% extends 'site_receitas/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8hE68aNjrXkE5E5h5l7O3O6j6N6p6c6" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
-    <title>{{titulo_pagina}}</title>
-    {% include 'receitas/header.html'%}
-</head>
-<body class="bg-dark text-light">
-    <div class="login-container">
-        <h2>{{titulo_janela}}</h2>
-        {% block content %}
-        <form method="post">
-            {% csrf_token %}
-            <table class="formulario">
-                {{ form.as_table }}
-            </table>
-            <button type="submit" class="btn modern-btn">{{botao}}</button>
-        </form>
-        {% endblock %}
+
+{% block titulo %}{{titulo_pagina}}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'receitas/css/style.css' %}">
+
+<!-- Container Principal -->
+<div class="delete-recipe-container">
+    <!-- Card de Deletar Receita -->
+        <div class="delete-recipe-card">
+            <div class="delete-recipe-header">
+                <h2 class="delete-recipe-title">{{titulo_janela}}</h2>
+            </div>
+            <form method="post" class="delete-recipe-form">
+                {% csrf_token %}
+                <!--formulario de deletar receita -->
+                <div class="form-content">
+                    <table class="formulario">
+                        {{ form.as_table }}
+                    </table>
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="btn delete-recipe-btn">{{botao}}</button>
+                </div>
+            </form>
+        </div>
     </div>
-</body>
-</html>
+{% endblock %}
 

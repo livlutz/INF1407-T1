@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 (
                     "nome",
                     models.CharField(
-                        help_text="Digite seu nome de usuario", max_length=100
+                        help_text="Digite seu nome de usuário", max_length=100
                     ),
                 ),
                 (
@@ -42,7 +42,7 @@ class Migration(migrations.Migration):
                 (
                     "titulo",
                     models.CharField(
-                        help_text="Digite o titulo da receita", max_length=200
+                        help_text="Digite o título da receita", max_length=200
                     ),
                 ),
                 ("ingredientes", models.TextField(help_text="Liste os ingredientes")),
@@ -57,7 +57,7 @@ class Migration(migrations.Migration):
                 (
                     "porcoes",
                     models.IntegerField(
-                        help_text="Numero de porcoes/ Quantas pessoas serve"
+                        help_text="Numero de porções/ Quantas pessoas serve"
                     ),
                 ),
                 (
