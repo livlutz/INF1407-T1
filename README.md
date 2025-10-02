@@ -17,30 +17,27 @@
 
 ---
 
-## 📖 Escopo do Projeto
+## Escopo do Projeto
 
-**Receitinhas da Vovó** é uma plataforma web completa para compartilhamento de receitas culinárias, desenvolvida com Django. O projeto implementa um sistema de gerenciamento de receitas.
+Receitinhas da Vovó é uma plataforma web completa para compartilhamento de receitas culinárias, desenvolvida com Django. O projeto implementa um sistema de gerenciamento de receitas.
 
 ### 🌟 O que funcionou
 
 #### Sistema de Usuários
-- ✅ Cadastro de usuários com campos personalizados
+- ✅ Cadastro de usuários 
 - ✅ Sistema de login e logout
 - ✅ Perfil personalizado com foto de perfil
 - ✅ Edição de dados pessoais
 - ✅ Exclusão de conta com confirmação
 
 #### Gerenciamento de Receitas
-- ✅ Criação de receitas com campos estruturados
-- ✅ Upload de imagens para receitas
+- ✅ Criação de receitas
 - ✅ Controle de visibilidade (público/privado)
-- ✅ Edição completa de receitas existentes
+- ✅ Edição de receitas
 - ✅ Exclusão de receitas com confirmação
 - ✅ Visualização detalhada de receitas
 
 #### Interface e Experiência
-- ✅ Design responsivo e moderno
-- ✅ Tema escuro com elementos visuais atraentes
 - ✅ Navegação intuitiva entre páginas
 - ✅ Formulários com validação
 - ✅ Feedback visual para ações do usuário
@@ -105,32 +102,34 @@ Após executar este comando, você poderá acessar o site em `http://127.0.0.1:8
 ## 📚 Manual do Usuário
 
 ### 🏠 Página Inicial
-A página inicial apresenta todas as receitas públicas disponíveis na plataforma. Os usuários podem:
-- Visualizar receitas em cards organizados
-- Navegar entre receitas sem necessidade de login
-- Acessar detalhes completos de cada receita
+A página inicial apresenta todas as receitas públicas disponíveis e botões de homepage, login e cadastro.
 
 ### 👤 Sistema de Usuários
 
 #### Cadastro de Novo Usuário
 1. Clique em **"Cadastrar"** no menu superior
 2. Preencha os campos obrigatórios:
-   - Nome de usuário (único)
+   - Nome de usuário
    - Email
-   - Senha e confirmação
+   - Senha
+   - Confirmação
 3. Opcionalmente, adicione uma foto de perfil
 4. Clique em **"Cadastrar"** para criar a conta
 
 #### Login
-1. Clique em **"Entrar"** no menu superior
+1. Clique em **"Login"** no menu superior
 2. Insira seu nome de usuário e senha
-3. Clique em **"Entrar"** para acessar sua conta
+3. Clique em **"Login"** para acessar sua conta
+4. Caso tenha esqucido sua senha ou errado sua senha, clique em **Esqueceu a senha?**
+5. Caso não tenha uma conta, clique em **Cadastre-se!** 
 
 #### Gerenciamento de Perfil
-- **Visualizar Perfil**: Acesse através do menu superior após fazer login
-- **Editar Dados**: Clique em "Editar" no seu perfil para modificar informações
-- **Alterar Foto**: Faça upload de uma nova imagem de perfil
-- **Excluir Conta**: Opção disponível nas configurações do perfil
+- **Perfil**: Acesse através do menu superior após fazer login
+- **Editar Dados**: Clique em "Atualizar Perfil" no seu perfil para modificar informações
+- **Deletar Conta**: Clique em "Deletar Conta" para deletar sua conta com confirmação
+- **Trocar senha**: Clique em "Trocar Senha" para trocar a senha da sua conta
+- **Ver receitas**: Clique em "Minhas Receitas" para ver as receitas criadas pelo seu usuário
+- **Criar receitas**: Clique em "Criar Receita" para criar uma receita
 
 ### 🍳 Gerenciamento de Receitas
 
@@ -139,9 +138,9 @@ A página inicial apresenta todas as receitas públicas disponíveis na platafor
 2. Clique em **"Criar Receita"**
 3. Preencha todos os campos obrigatórios:
    - Nome da receita
-   - Ingredientes (um por linha)
-   - Modo de preparo (um passo por linha)
-   - Tempo de preparo
+   - Ingredientes 
+   - Modo de preparo 
+   - Tempo de preparo (em minutos)
    - Número de porções
    - Categoria
 4. Defina a visibilidade (Pública ou Privada)
@@ -154,7 +153,7 @@ A página inicial apresenta todas as receitas públicas disponíveis na platafor
 - **Detalhes**: Clique em qualquer receita para ver informações completas
 
 #### Editar Receitas
-1. Acesse sua receita através do perfil
+1. Acesse sua receita através do perfil ou a partir da homepage clicando em receitas cujo autor é o seu usuário
 2. Clique no botão **"Editar"**
 3. Modifique os campos desejados
 4. Salve as alterações
