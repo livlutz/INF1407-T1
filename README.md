@@ -201,15 +201,3 @@ Quando mudanças que afetam o banco de dados forem realizadas:
 python manage.py makemigrations
 python manage.py migrate
 ```
-
-### Backup dos Dados
-
-```bash
-python manage.py dumpdata > backup.json
-```
-
-### Restauração dos Dados
-
-```bash
-python manage.py loaddata backup.json
-```
