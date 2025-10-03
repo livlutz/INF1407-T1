@@ -28,7 +28,7 @@ Receitinhas da Vovó é uma plataforma web completa para compartilhamento de rec
 O site está disponível em https://livialuiza.pythonanywhere.com/
 
 ##### Email no terminal
-Em deploy, o email é enviado para o terminal e aparece no log em https://www.pythonanywhere.com/user/livialuiza/files/var/log/livialuiza.pythonanywhere.com.server.log
+Em deploy, o email é enviado para o terminal e aparece no log em https://www.pythonanywhere.com/user/livialuiza/files/var/log/livialuiza.pythonanywhere.com.server.log (acessado apenas com login)
 
 #### Sistema de Usuários
 - ✅ Cadastro de usuários 
@@ -159,7 +159,7 @@ Copie o link que aparece a partir de **/password_reset_confirm** (incluso) e col
 
 #### Visualizar Receitas
 - **Receitas Próprias**: Acesse através do seu perfil
-- **Receitas Públicas**: Disponíveis na página inicial (incluindo as suas)
+- **Receitas Públicas**: Disponíveis na página inicial (incluindo as suas públicas)
 - **Detalhes**: Clique no nome de qualquer receita para ver informações completas
 
 #### Editar Receitas
@@ -183,12 +183,11 @@ Copie o link que aparece a partir de **/password_reset_confirm** (incluso) e col
 - ✅ Cadastro de múltiplos usuários com dados válidos e inválidos
 - ✅ Login com credenciais corretas e incorretas
 - ✅ Criação de receitas com diferentes combinações de campos
-- ✅ Upload de imagens em formatos diversos (JPG, PNG)
+- ✅ Upload de imagens
 - ✅ Edição e exclusão de receitas próprias
 - ✅ Tentativa de acesso a receitas privadas de outros usuários
 
 #### Testes de Interface
-- ✅ Navegação em diferentes computadores e resoluções
 - ✅ Validação visual de formulários
 - ✅ Carregamento e exibição de imagens
 
