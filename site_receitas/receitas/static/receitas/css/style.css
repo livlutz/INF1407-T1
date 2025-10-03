@@ -1,3 +1,22 @@
+.criar-receita-form input,
+.criar-receita-form textarea,
+.criar-receita-form select {
+  color: #fff !important;
+  background: #232323;
+  caret-color: #ff9800;
+}
+
+.criar-receita-form input::placeholder,
+.criar-receita-form textarea::placeholder {
+  color: #ffe0b2 !important;
+  opacity: 1;
+}
+
+.criar-receita-form input:focus,
+.criar-receita-form textarea:focus {
+  color: #fff !important;
+  background: #232323;
+}
 /*Coloca logo fixo no canto superior esquerdo das páginas*/
 .logo-fixed {
   position: fixed;
