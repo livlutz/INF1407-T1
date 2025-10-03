@@ -22,7 +22,6 @@
         <a href="{% url 'receitas:criar_receita' %}" class="btn modern-btn">Criar Receita</a>
     </div>
     <div class="profile-assets">
-        <h4>Outros dados</h4>
         <p><strong>Data de cadastro:</strong> {{ usuario.date_joined|date:'d/m/Y' }}</p>
         <p><strong>Receitas criadas:</strong> {{ usuario.receita_set.count }}</p>
     </div>

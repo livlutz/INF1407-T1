@@ -36,9 +36,12 @@ def perfil(request, id):
     Returns:
         HttpResponse: A resposta HTTP com a página de perfil do usuário.
     """
+    # Garante que o usuário está autenticado e é o dono do perfil
+    if not request.user.is_authenticated or request.user.id != int(id):
+        return redirect('receitas:homepage')  # ou mostre uma página de erro/permissão negada
+
     usuario = get_object_or_404(Usuario, pk=id)
 
-    #conteúdo do contexto para renderizar o template
     contexto = {
         'usuario': usuario,
         'titulo_janela': 'Perfil',
@@ -88,7 +91,6 @@ def deletar(request):
     """
     return render(request, 'usuarios/deletar.html')
 
-#cria o usuario
 class UsuarioCreateView(View):
     """View de criação de usuário
 
@@ -132,32 +134,6 @@ class UsuarioCreateView(View):
             contexto = {'formulario': formulario, 'mensagem': 'Erro ao completar o cadastro!'}
             return render(request, "usuarios/cadastro.html", contexto)
 
-class UsuarioReadView(View):
-    """View de leitura de usuário
-
-    Args:
-        View (class): Classe base para views baseadas em classe.
-    """
-    def get(self, request, *args, **kwargs):
-        """Exibe o perfil do usuário
-
-        Args:
-            request (HttpRequest): A solicitação HTTP recebida.
-
-        Returns:
-            HttpResponse: A resposta HTTP com o perfil do usuário.
-        """
-
-        usuario = Usuario.objects.get(pk=self.kwargs['id'])
-
-        contexto = {'usuario': usuario,
-                    'formulario': CustomUserCreationForm(instance=usuario),
-                    'titulo_janela' : 'Perfil',
-                    'titulo_pagina': 'Perfil do Usuário',
-                    'botao' : 'Ver meu perfil',}
-
-        return render(request, "usuarios/perfil.html", contexto)
-
 class UsuarioUpdateView(View):
     """View de atualização de usuário
 
@@ -165,6 +141,7 @@ class UsuarioUpdateView(View):
         View (class): Classe base para views baseadas em classe.
     """
     def get(self, request, id, *args, **kwargs):
+        
         """Exibe o formulário de atualização de usuário
 
         Args:
@@ -174,6 +151,10 @@ class UsuarioUpdateView(View):
         Returns:
             HttpResponse: A resposta HTTP com o formulário de atualização de usuário.
         """
+        # Garante que o usuário está autenticado e é o dono do perfil
+        if not request.user.is_authenticated or request.user.id != int(id):
+            return redirect('receitas:homepage')  # ou mostre uma página de erro/permissão negada
+        
         usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
 
         formulario = UsuarioUpdateForm(instance=usuario)
@@ -185,7 +166,6 @@ class UsuarioUpdateView(View):
             'titulo_pagina': 'Atualizar Dados do Usuário',
             'botao': 'Atualizar Perfil',
         }
-
         return render(request, 'usuarios/atualiza.html', contexto)
 
     def post(self, request, id, *args, **kwargs):
@@ -198,7 +178,10 @@ class UsuarioUpdateView(View):
         Returns:
             HttpResponse: A resposta HTTP com o formulário de atualização de usuário.
         """
-
+        # Garante que o usuário está autenticado e é o dono do perfil
+        if not request.user.is_authenticated or request.user.id != int(id):
+            return redirect('receitas:homepage')  # ou mostre uma página de erro/permissão negada
+            
         usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
 
         formulario = UsuarioUpdateForm(request.POST, request.FILES, instance=usuario)
