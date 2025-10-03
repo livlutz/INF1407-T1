@@ -23,11 +23,19 @@ Receitinhas da Vovó é uma plataforma web completa para compartilhamento de rec
 
 ### 🌟 O que funcionou
 
+#### Deploy
+
+O site está disponível em https://livialuiza.pythonanywhere.com/
+
+##### Email no terminal
+Em deploy, o email é enviado para o terminal e aparece no log em https://www.pythonanywhere.com/user/livialuiza/files/var/log/livialuiza.pythonanywhere.com.server.log
+
 #### Sistema de Usuários
 - ✅ Cadastro de usuários 
 - ✅ Sistema de login e logout
 - ✅ Perfil personalizado com foto de perfil
 - ✅ Edição de dados pessoais
+- ✅ Esqueci minha senha com email enviado no terminal
 - ✅ Exclusão de conta com confirmação
 
 #### Gerenciamento de Receitas
@@ -38,7 +46,7 @@ Receitinhas da Vovó é uma plataforma web completa para compartilhamento de rec
 - ✅ Visualização detalhada de receitas
 
 #### Interface e Experiência
-- ✅ Navegação intuitiva entre páginas
+- ✅ Navegação intuitiva entre páginas (Nav-bar com autenticação)
 - ✅ Formulários com validação
 - ✅ Feedback visual para ações do usuário
 
@@ -49,7 +57,7 @@ Receitinhas da Vovó é uma plataforma web completa para compartilhamento de rec
 - Conforme as especificações do trabalho no enunciado, não houve nenhuma funcionalidade que testamos e não funcionou
 
 
-## 🚀 Instalação e Configuração
+## 🚀 Instalação e Configuração Local
 
 ### Instalação Automática
 
@@ -118,9 +126,9 @@ A página inicial apresenta todas as receitas públicas disponíveis e botões d
 
 #### Login
 1. Clique em **"Login"** no menu superior
-2. Insira seu nome de usuário e senha
+2. Insira seu email e senha
 3. Clique em **"Login"** para acessar sua conta
-4. Caso tenha esqucido sua senha ou errado sua senha, clique em **Esqueceu a senha?**
+4. Caso tenha esquecido sua senha ou errado sua senha, clique em **Esqueceu a senha?** (O email de recuperação é enviado para o terminal)
 5. Caso não tenha uma conta, clique em **Cadastre-se!** 
 
 #### Gerenciamento de Perfil
@@ -128,8 +136,10 @@ A página inicial apresenta todas as receitas públicas disponíveis e botões d
 - **Editar Dados**: Clique em "Atualizar Perfil" no seu perfil para modificar informações
 - **Deletar Conta**: Clique em "Deletar Conta" para deletar sua conta com confirmação
 - **Trocar senha**: Clique em "Trocar Senha" para trocar a senha da sua conta
-- **Ver receitas**: Clique em "Minhas Receitas" para ver as receitas criadas pelo seu usuário
+- **Ver receitas**: Clique em "Minhas Receitas" para ver as receitas criadas pelo seu usuário, incluindo as privadas - Você pode clicar em cada receita para vê-la, editar ou excluir
 - **Criar receitas**: Clique em "Criar Receita" para criar uma receita
+- **Esqueci a senha**: Clique no link na página de perfil, coloque seu email no campo designado e veja a mensagem no terminal. O link gerado no **href** deve ser copiado da seguinte forma no seu navegador: 
+Copie o link que aparece a partir de **/password_reset_confirm** (incluso) e cole depois da url da home.
 
 ### 🍳 Gerenciamento de Receitas
 
@@ -144,13 +154,13 @@ A página inicial apresenta todas as receitas públicas disponíveis e botões d
    - Número de porções
    - Categoria
 4. Defina a visibilidade (Pública ou Privada)
-5. Opcionalmente, adicione uma foto da receita
+5. Opcionalmente, adicione uma foto da receita (No momento adicionar a foto não muda a visualização do campo no formulário, mas é possível remover ou trocar a foto depois na edição da receita)
 6. Clique em **"Salvar"** para publicar
 
 #### Visualizar Receitas
 - **Receitas Próprias**: Acesse através do seu perfil
-- **Receitas Públicas**: Disponíveis na página inicial
-- **Detalhes**: Clique em qualquer receita para ver informações completas
+- **Receitas Públicas**: Disponíveis na página inicial (incluindo as suas)
+- **Detalhes**: Clique no nome de qualquer receita para ver informações completas
 
 #### Editar Receitas
 1. Acesse sua receita através do perfil ou a partir da homepage clicando em receitas cujo autor é o seu usuário
@@ -178,15 +188,13 @@ A página inicial apresenta todas as receitas públicas disponíveis e botões d
 - ✅ Tentativa de acesso a receitas privadas de outros usuários
 
 #### Testes de Interface
-- ✅ Navegação em diferentes dispositivos e resoluções
+- ✅ Navegação em diferentes computadores e resoluções
 - ✅ Validação visual de formulários
-- ✅ Responsividade em mobile e desktop
 - ✅ Carregamento e exibição de imagens
 
 #### Testes de Segurança
 - ✅ Prevenção de acesso não autorizado a páginas protegidas
 - ✅ Validação de permissões para edição/exclusão
-- ✅ Sanitização básica de dados de entrada
 
 ---
 

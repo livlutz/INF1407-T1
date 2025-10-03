@@ -9,6 +9,7 @@ from receitas.models import Receita
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -80,16 +81,6 @@ def login(request):
     #renderiza o template de login
     return render(request, 'usuarios/login.html', contexto)
 
-def deletar(request):
-    """Função de deletar usuario
-
-    Args:
-        request (HttpRequest): A solicitação HTTP recebida.
-
-    Returns:
-        HttpResponse: A resposta HTTP com a página de confirmação de deleção.
-    """
-    return render(request, 'usuarios/deletar.html')
 
 class UsuarioCreateView(View):
     """View de criação de usuário
@@ -217,6 +208,10 @@ class UsuarioDeleteView(View):
         Returns:
             HttpResponse: A resposta HTTP com a confirmação de deleção do usuário.
         """
+        # Garante que o usuário está autenticado e é o dono do perfil
+        if not request.user.is_authenticated or request.user.id != int(id):
+            return redirect('receitas:homepage')  # ou mostre uma página de erro/permissão negada
+        
         usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
 
         contexto = {
@@ -238,6 +233,10 @@ class UsuarioDeleteView(View):
         Returns:
             HttpResponse: A resposta HTTP redirecionando para a página de login.
         """
+        # Garante que o usuário está autenticado e é o dono do perfil
+        if not request.user.is_authenticated or request.user.id != int(id):
+            return redirect('receitas:homepage')  # ou mostre uma página de erro/permissão negada
+        
         usuario = get_object_or_404(Usuario, pk=self.kwargs['id'])
         usuario.delete()
         return HttpResponseRedirect(reverse_lazy("usuarios:login"))
@@ -256,7 +255,10 @@ class ReceitaListView(View):
         Returns:
             HttpResponse: A resposta HTTP com as receitas do usuário.
         """
-
+        # Garante que o usuário está autenticado e é o dono do perfil
+        if not request.user.is_authenticated or request.user.id != int(id):
+            return redirect('receitas:homepage')  # ou mostre uma página de erro/permissão negada
+        
         usuario = Usuario.objects.get(pk=self.kwargs['id'])
 
         receitas = Receita.objects.filter(autor=usuario)
@@ -270,16 +272,17 @@ class ReceitaListView(View):
 
         return render(request, "usuarios/ver_minhas_receitas.html", contexto)
 
-class MyPasswordChangeView(PasswordChangeView):
+class MyPasswordChangeView(LoginRequiredMixin,PasswordChangeView):
     """View para alteração de senha do usuário
 
     Args:
         PasswordChangeView (class): Classe base para views de alteração de senha.
     """
+    
     template_name = 'usuarios/password_change_form.html'
     success_url = reverse_lazy('usuarios:sec-password-change-done')
 
-class MyPasswordChangeDoneView(PasswordChangeDoneView):
+class MyPasswordChangeDoneView(LoginRequiredMixin,PasswordChangeDoneView):
     """View para confirmação de alteração de senha do usuário
 
     Args:

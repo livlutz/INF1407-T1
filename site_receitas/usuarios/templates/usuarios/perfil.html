@@ -17,7 +17,7 @@
     <div class="profile-actions">
         <a href="{% url 'usuarios:atualizar_perfil' usuario.id %}" class="btn modern-btn">Atualizar Perfil</a>
         <a href="{% url 'usuarios:deletar' usuario.id %}" class="danger btn modern-btn">Deletar Conta</a>
-        <a href="{% url 'usuarios:sec-password-change' usuario.id %}" class="btn modern-btn">Trocar Senha</a>
+        <a href="{% url 'usuarios:sec-password-change' %}" class="btn modern-btn">Trocar Senha</a>
         <a href="{% url 'usuarios:ver_minhas_receitas' usuario.id %}" class="btn modern-btn">Minhas Receitas</a>
         <a href="{% url 'receitas:criar_receita' %}" class="btn modern-btn">Criar Receita</a>
     </div>

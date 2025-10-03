@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from receitas.models import Receita
 from django.views.generic.base import View
@@ -6,10 +6,11 @@ from usuarios.models import Usuario
 from receitas.forms import ReceitaModel2Form
 from django.urls.base import reverse_lazy
 from django.http.response import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-class ReceitasCreateView(View):
+class ReceitasCreateView(LoginRequiredMixin, View):
     """View que cria uma nova receita.
 
     Args:
@@ -80,45 +81,33 @@ class PubReceitasListView(View):
 
         return render(request, 'receitas/home.html', contexto)
 
-class ReceitasUpdateView(View):
-    """View que atualiza uma receita.
-
-    Args:
-        View (View): Classe base para views baseadas em classe.
-    """
+class ReceitasUpdateView(LoginRequiredMixin, View):
+    """View que atualiza uma receita. Apenas o autor pode editar."""
+    login_url = '/login/'  # redireciona se não estiver logado
 
     def get(self, request, id, *args, **kwargs):
-        """Renderiza o formulario para atualizar a receita.
-
-        Args:
-            request (HttpRequest): A requisição HTTP.
-            id (int): O ID da receita a ser atualizada.
-
-        Returns:
-            HttpResponse: A resposta HTTP com o formulario de atualização da receita.
-        """
         receita = get_object_or_404(Receita, id=id)
+
+        # Verifica se o usuário é o autor da receita
+        if request.user != receita.autor:
+            return redirect('receitas:homepage')  # ou página de erro
 
         formulario = ReceitaModel2Form(instance=receita)
 
-        contexto = {'formulario': formulario,
-                    'titulo_pagina': 'Editar',
-                    'titulo_janela': 'Editar Receita',
-                    'botao': 'Salvar', }
-
+        contexto = {
+            'formulario': formulario,
+            'titulo_pagina': 'Editar',
+            'titulo_janela': 'Editar Receita',
+            'botao': 'Salvar',
+        }
         return render(request, 'receitas/atualizaReceita.html', contexto)
 
     def post(self, request, id, *args, **kwargs):
-        """Processa o formulario para atualizar a receita.
-
-        Args:
-            request (HttpRequest): A requisição HTTP.
-            id (int): O ID da receita a ser atualizada.
-
-        Returns:
-            HttpResponse: A resposta HTTP após a atualização da receita.
-        """
         receita = get_object_or_404(Receita, id=id)
+
+        # Verifica se o usuário é o autor da receita
+        if request.user != receita.autor:
+            return redirect('receitas:homepage')  # ou página de erro
 
         formulario = ReceitaModel2Form(request.POST, request.FILES, instance=receita)
 
@@ -126,9 +115,14 @@ class ReceitasUpdateView(View):
             formulario.save()
             return HttpResponseRedirect(reverse_lazy("receitas:homepage"))
 
-        else:
-            contexto = {'formulario': formulario,'mensagem': 'Erro ao editar receita!'}
-            return render(request, 'receitas/atualizaReceita.html', contexto)
+        contexto = {
+            'formulario': formulario,
+            'mensagem': 'Erro ao editar receita!',
+            'titulo_pagina': 'Editar',
+            'titulo_janela': 'Editar Receita',
+            'botao': 'Salvar',
+        }
+        return render(request, 'receitas/atualizaReceita.html', contexto)
 
 class ReceitasDeleteView(View):
     """View que deleta uma receita.
@@ -147,6 +141,9 @@ class ReceitasDeleteView(View):
         Returns:
             HttpResponse: A resposta HTTP com a confirmação de deleção da receita.
         """
+         # Verifica se o usuário é o autor da receita
+        if request.user != receita.autor:
+            return redirect('receitas:homepage')  # ou página de erro
 
         receita = get_object_or_404(Receita, id=id)
         contexto = {'receita': receita,
@@ -167,6 +164,10 @@ class ReceitasDeleteView(View):
         Returns:
             HttpResponse: A resposta HTTP após a deleção da receita.
         """
+
+        # Verifica se o usuário é o autor da receita
+        if request.user != receita.autor:
+            return redirect('receitas:homepage')  # ou página de erro
 
         receita = get_object_or_404(Receita, id=id)
 
@@ -193,8 +194,13 @@ class VerReceita(View):
         """
         
         receita = get_object_or_404(Receita, pk=self.kwargs['id'])
-        contexto = { 'receita': receita,
-                    'titulo_pagina': 'Ver receita',
-                    'titulo_janela': 'Vendo receita',
-            }
-        return render(request,'receitas/ver_receita.html',contexto)
+        if receita.visibilidade == 'priv' or receita.visibilidade == 'Priv':
+            if receita.autor != request.user.id:
+                return redirect('receitas:homepage')
+
+        else:
+            contexto = { 'receita': receita,
+                        'titulo_pagina': 'Ver receita',
+                        'titulo_janela': 'Vendo receita',
+                }
+            return render(request,'receitas/ver_receita.html',contexto)
