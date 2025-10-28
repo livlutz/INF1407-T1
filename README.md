@@ -27,6 +27,8 @@ Receitinhas da Vovó é uma plataforma web completa para compartilhamento de rec
 
 O site está disponível em https://livialuiza.pythonanywhere.com/
 
+link do vídeo do youtube usado como tutorial para fazer o deploy no pythonanywhere : https://www.youtube.com/watch?v=xtnUwvjOThg
+
 ##### Email no terminal
 Em deploy, o email é enviado para o terminal e aparece no log em https://www.pythonanywhere.com/user/livialuiza/files/var/log/livialuiza.pythonanywhere.com.server.log (acessado apenas com login)
 
